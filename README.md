@@ -16,6 +16,7 @@ curl
 ./awesome-proxies.sh [proxy type]
 ```
  Usable proxy types: http,https,socks4,socks5
+
 ------------------------------------------------------------
 ## Example
 
