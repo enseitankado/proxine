@@ -1,16 +1,16 @@
-# 🎉 Free Awesome Proxy List
-Periodically build fresh proxy list from different online source and merge into big one.
+# Free Awesome Proxy List
+Periodically build fresh proxy list from 70 online sources, checks and merges into big one.
 
  Update Frequency: ```Every 30 minutes```
 
-## 🚀 Contains Proxies of over 50 Providers and is updated regularely
+## Contains Proxies of over 50 Providers and is updated regularely
 
-[![Refresh](https://github.com/saschazesiger/Free-Proxies/actions/workflows/update.yml/badge.svg)](https://github.com/saschazesiger/Free-Proxies/actions/workflows/update.yml)
-[![Commits](https://img.shields.io/github/last-commit/saschazesiger/Free-Proxies?style=flat&logo=github)](https://github.com/saschazesiger/Free-Proxies/commits/master)
-[![Commits](https://img.shields.io/github/commit-activity/w/saschazesiger/Free-Proxies?style=flat&logo=github)](https://github.com/saschazesiger/Free-Proxies/commits/master)
-[![Issues](https://img.shields.io/github/issues/saschazesiger/Free-Proxies?style=flat&logo=github)](https://github.com/saschazesiger/Free-Proxies/issues)
-[![License](https://img.shields.io/github/license/saschazesiger/Free-Proxies?style=flat&logo=github)](https://github.com/saschazesiger/Free-Proxies/blob/master/LICENSE)
-[![Stargazers](https://img.shields.io/github/stars/saschazesiger/Free-Proxies?style=flat&logo=github)](https://github.com/saschazesiger/Free-Proxies/stargazers)
+[![Refresh](https://github.com/enseitankado/awesome-proxies/actions/workflows/update.yml/badge.svg)](https://github.com/enseitankado/awesome-proxies/actions/workflows/update.yml)
+[![Commits](https://img.shields.io/github/last-commit/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
+[![Commits](https://img.shields.io/github/commit-activity/w/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
+[![Issues](https://img.shields.io/github/issues/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/issues)
+[![License](https://img.shields.io/github/license/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/blob/master/LICENSE)
+[![Stargazers](https://img.shields.io/github/stars/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/stargazers)
 
 ------------------------------------------------------------
 
@@ -43,6 +43,7 @@ curl, python
 Source | Description
 --- | ---
 saschazesiger@github | 32 provider
+nanosans@github | 31 provider
 fate0@github | 6 provider
 proxy4parsing@github | 2 provider
 UptimerBot@github | 1 provider
