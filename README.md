@@ -3,7 +3,7 @@ Periodically build fresh proxy list from 70 online sources, checks and merges in
 
  Update Frequency: ```Every 30 minutes```
 
-## Contains Proxies of over 50 Providers and is updated regularely
+## Contains Proxies of over 70 Providers and is updated regularely
 
 [![Refresh](https://github.com/enseitankado/awesome-proxies/actions/workflows/update.yml/badge.svg)](https://github.com/enseitankado/awesome-proxies/actions/workflows/update.yml)
 [![Commits](https://img.shields.io/github/last-commit/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
