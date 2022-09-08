@@ -5,11 +5,9 @@ Periodically build fresh proxy list from 70 online sources, checks and merges in
 
 ## Contains Proxies of over 70 Providers and is updated regularely
 
-[![Refresh](https://github.com/enseitankado/awesome-proxies/actions/workflows/update.yml/badge.svg)](https://github.com/enseitankado/awesome-proxies/actions/workflows/update.yml)
 [![Commits](https://img.shields.io/github/last-commit/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
 [![Commits](https://img.shields.io/github/commit-activity/w/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
 [![Issues](https://img.shields.io/github/issues/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/issues)
-[![License](https://img.shields.io/github/license/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/blob/master/LICENSE)
 [![Stargazers](https://img.shields.io/github/stars/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/stargazers)
 
 ------------------------------------------------------------
