@@ -1,9 +1,9 @@
-# Free Awesome Proxy List
-Periodically build fresh proxy list from 70 online sources, checks and merges into big one.
+# Proxine: Fast and Elite Proxy List
+Periodically build fresh proxy list from more than 100 online sources, checks and merges into one list. This repo has only elite proxies.
 
- Update Frequency: ```Every 30 minutes```
+ Update Frequency: ```Every 69 minutes```
 
-## Contains Proxies of over 70 Providers and is updated regularely
+## Contains Proxies of over 100 Providers and is updated regularely
 
 [![Commits](https://img.shields.io/github/last-commit/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
 [![Commits](https://img.shields.io/github/commit-activity/w/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
@@ -36,7 +36,7 @@ curl, python
 
 ## Proxy Sources
 
- awesome-proxies uses a lot of provider:
+ Proxine uses a lot of provider:
 
 Source | Description
 --- | ---
@@ -65,4 +65,4 @@ pubproxy.com | *1 provider
 ## Tools
 
 You can check proxy list in Windows env. with [EliteProxySwitcher](https://www.eliteproxyswitcher.com/). EPS also has auto switch feature to change active proxy periodicaly.
-[Open Proxy Checker](https://openproxy.space/software/proxy-checker) is good alternative for Windows.
+[Open Proxy Checker](https://openproxy.space/software/proxy-checker) is good alternative for Windows to check proxies.
