@@ -13,6 +13,20 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python utils/parsefate0.py http
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-http.txt"
+	echo "\n"
+	curl -s "https://github.com/mertguvencli/http-proxy-list/blob/main/proxy-list/data.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/RX4096/proxy-list/main/online/http.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/http/http.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt"
+	echo "\n"
+	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=http"
        ;;
    "https")
 	echo "\n"
@@ -25,6 +39,20 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python utils/parsefate0.py https
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-https.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt"
+	echo "\n"
+	curl -s "https://github.com/mertguvencli/http-proxy-list/blob/main/proxy-list/data.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/RX4096/proxy-list/main/online/https.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/https/https.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt"
+	echo "\n"
+	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=https"
 	;;
    "socks4")
 	echo "\n"
@@ -35,6 +63,16 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/saschazesiger/Free-Proxies/master/proxies/socks4.txt"
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/socks4.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-socks4.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS4_RAW.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/socks4.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/socks4/socks4.txt"
+	echo "\n"
+	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=socsk4"
        ;;
    "socks5")
 	echo "\n"
@@ -45,6 +83,18 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/saschazesiger/Free-Proxies/master/proxies/socks5.txt"
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/socks5.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-socks5.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS5_RAW.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/socks5.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/socks5/socks5.txt"
+	echo "\n"
+	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=socsk5"
        ;;
    *)
 esac

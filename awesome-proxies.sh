@@ -3,6 +3,8 @@ if [ $# -eq 0 ]; then
    echo ""
    echo "No arguments provided."
    echo ""
+   echo "  Usage: ./awesome-proxies.sh http/https/socks4/socks5";
+   echo ""
    echo "Example: ./awesome-proxies.sh http"
    exit 1
 fi
