@@ -1,7 +1,7 @@
 # Proxine: Fast and Elite Proxy List
 Periodically build fresh proxy list from more than 100 online sources, checks and merges into one list. This repo has only elite proxies.
 
- Update Frequency: ```Every 69 minutes```
+ Update Frequency: ```Every 30 minutes```
 
 ## Contains Proxies of over 100 Providers and is updated regularely
 
