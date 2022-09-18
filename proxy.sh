@@ -13,4 +13,4 @@ if ! [[ "$1" =~ ^(http|https|socks4|socks5)$ ]]; then
 	exit 2
 fi
 
-./utils/core.sh $@ | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}\:[0-9]{1,5}" | sort -u
+./utils/core.sh $@ | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}\:[0-9]{1,5}" | sort -u 
