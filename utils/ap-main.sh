@@ -4,13 +4,17 @@ case $arg in
    "http")
 	curl -s "https://raw.githubusercontent.com/ItzRazvyy/ProxyList/main/http.txt"
 	echo "\n"
-	curl -s "https://github.com/saisuiu/uiu"
+	curl -s "https://raw.githubusercontent.com/saisuiu/uiu/main/cnfree.txt"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/saisuiu/uiu/main/free.txt"
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/proxy4parsing/proxy-list/main/http.txt"
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/saschazesiger/Free-Proxies/master/proxies/premium.txt"
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python utils/parsefate0.py http
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/arunsakthivel96/proxyBEE/master/proxy.list" | python utils/parsebee.py http
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt"
 	echo "\n"
@@ -27,8 +31,22 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt"
 	echo "\n"
 	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=http"
+	echo "\n"
+	curl -s "https://proxyspace.pro/http.txt"
+	echo "\n"
+	curl -s "https://www.ipaddress.com/proxy-list/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+	echo "\n"
+	curl -s "http://www.httptunnel.ge/ProxyListForFree.aspx" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+	echo "\n"
+	curl -s "https://www.proxyscan.io/download?type=http"
+	echo "\n"
+	curl -s "http://pubproxy.com/api/proxy?limit=20&format=txt"
        ;;
    "https")
+	echo "\n"
+	curl -s "http://www.httptunnel.ge/ProxyListForFree.aspx" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+	echo "\n"
+	curl -s "https://www.ipaddress.com/proxy-list/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/UptimerBot/proxy-list/main/proxies/http.txt"
 	echo "\n"
@@ -37,6 +55,8 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/saschazesiger/Free-Proxies/master/proxies/premium.txt"
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python utils/parsefate0.py https
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/arunsakthivel96/proxyBEE/master/proxy.list" | python utils/parsebee.py https
 	echo "\n"
 	curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt"
 	echo "\n"
@@ -53,6 +73,14 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt"
 	echo "\n"
 	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=https"
+	echo "\n"
+	curl -s "https://proxyspace.pro/https.txt"
+	echo "\n"
+	curl -s "http://api.foxtools.ru/v2/Proxy.txt"
+	echo "\n"
+	curl -s "https://www.proxyscan.io/download?type=http"
+	echo "\n"
+	curl -s "http://pubproxy.com/api/proxy?limit=20&format=txt"
 	;;
    "socks4")
 	echo "\n"
@@ -73,6 +101,10 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/socks4/socks4.txt"
 	echo "\n"
 	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=socsk4"
+	echo "\n"
+	curl -s "https://raw.githubusercontent.com/saisuiu/uiu/main/free.txt"
+	echo "\n"
+	curl -s "https://www.proxyscan.io/download?type=socks4"
        ;;
    "socks5")
 	echo "\n"
@@ -95,6 +127,10 @@ case $arg in
 	curl -s "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/socks5/socks5.txt"
 	echo "\n"
 	curl -s "http://pubproxy.com/api/proxy?limit=100&format=txt&type=socsk5"
+	echo "\n"
+	curl -s "https://proxyspace.pro/socks5.txt"
+	echo "\n"
+	curl -s "https://www.proxyscan.io/download?type=socks5"
        ;;
    *)
 esac
