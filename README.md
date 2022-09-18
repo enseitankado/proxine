@@ -1,5 +1,6 @@
 # Proxine: Fast and Elite Proxy List
-Periodically build fresh proxy list from more than 100 online sources, checks and merges into one list. This repo has only elite proxies.
+Periodically build fresh proxy list from more than 110 online sources, checks and merges into one list. This repo has only elite proxies.
+Raw lists profiled with [Proxy Profiler](https://github.com/enseitankado/proxy-profiler).
 
  Update Frequency: ```Every 30 minutes```
 
@@ -13,7 +14,7 @@ Periodically build fresh proxy list from more than 100 online sources, checks an
 ------------------------------------------------------------
 
 ## Requirements
-curl, python
+curl, python3
 
 ------------------------------------------------------------
 
