@@ -4,7 +4,7 @@ Raw lists profiled with [Proxy Profiler](https://github.com/enseitankado/proxy-p
 
  Update Frequency: ```Every 30 minutes```
 
-## Contains Proxies of over 100 Providers and is updated regularely
+## Contains Proxies of over 110 Providers and is updated regularely
 
 [![Commits](https://img.shields.io/github/last-commit/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
 [![Commits](https://img.shields.io/github/commit-activity/w/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
@@ -21,7 +21,7 @@ curl, python3
 ## Usage
 
 ```powershell
-./awesome-proxies.sh [proxy type]
+./proxine.sh [proxy type]
 ```
  Usable proxy types: ```http, https, socks4, socks5```
 
@@ -30,7 +30,7 @@ curl, python3
 ## Example
 
 ```powershell
-./awesome-proxies.sh https > proxies.lst
+./proxine.sh https > proxies.lst
 ```
 
 ------------------------------------------------------------
@@ -71,4 +71,4 @@ proxyscan.io | *1 provider
 ## Tools
 
 You can check proxy list in Windows env. with [EliteProxySwitcher](https://www.eliteproxyswitcher.com/). EPS also has auto switch feature to change active proxy periodicaly.
-[Open Proxy Checker](https://openproxy.space/software/proxy-checker) is good alternative for Windows to check proxies.
+[Open Proxy Checker](https://openproxy.space/software/proxy-checker) is good alternative for Windows to check proxies. [Proxy profiler](https://github.com/enseitankado/proxy-profiler) to test and profile large proxy lists.

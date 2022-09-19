@@ -14,9 +14,9 @@ do
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/saschazesiger/Free-Proxies/master/proxies/premium.txt"
 		printf "\n"
-		curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python utils/parsefate0.py http
+		curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python3 utils/parsefate0.py http
 		printf "\n"
-		curl -s "https://raw.githubusercontent.com/arunsakthivel96/proxyBEE/master/proxy.list" | python utils/parsebee.py http
+		curl -s "https://raw.githubusercontent.com/arunsakthivel96/proxyBEE/master/proxy.list" | python3 utils/parsebee.py http
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt"
 		printf "\n"
@@ -56,9 +56,9 @@ do
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/saschazesiger/Free-Proxies/master/proxies/premium.txt"
 		printf "\n"
-		curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python utils/parsefate0.py https
+		curl -s "https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list" | python3 utils/parsefate0.py https
 		printf "\n"
-		curl -s "https://raw.githubusercontent.com/arunsakthivel96/proxyBEE/master/proxy.list" | python utils/parsebee.py https
+		curl -s "https://raw.githubusercontent.com/arunsakthivel96/proxyBEE/master/proxy.list" | python3 utils/parsebee.py https
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt"
 		printf "\n"
