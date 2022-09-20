@@ -35,6 +35,14 @@ curl, python3
 
 ------------------------------------------------------------
 
+## Crontab Example
+```
+*/26 * * * * /root/proxine/proxine.sh http > /root/tmp/http.lst
+*/27 * * * * /root/proxine/proxine.sh https > /root/tmp/https.lst
+*/28 * * * * /root/proxine/proxine.sh socks4 > /root/tmp/socks4.lst
+*/29 * * * * /root/proxine/proxine.sh socks5 > /root/tmp/socks5.lst
+```
+
 ## Proxy Sources
 
  Proxine uses a lot of provider:
