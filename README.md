@@ -1,6 +1,6 @@
-# Proxine: Fast and Elite Proxy List
-Periodically build fresh proxy list from more than 110 online sources, checks and merges into one list. This repo has only elite proxies.
-Raw lists profiled with [Proxy Profiler](https://github.com/enseitankado/proxy-profiler).
+# Proxine: Only FAST and ELITE (LEVEL-1) PROXIES
+
+Periodically build fresh proxy list from more than 110 online sources, checks and merges into one list. This repo HAS ONLY ELITE (LEVEL 1) proxies. Filtering is performed by [Proxy Profiler](https://github.com/enseitankado/proxy-profiler). 
 
  Update Frequency: ```Every 30 minutes```
 
@@ -34,14 +34,6 @@ curl, python3
 ```
 
 ------------------------------------------------------------
-
-## Crontab Example
-```
-*/26 * * * * /root/proxine/proxine.sh http > /root/tmp/http.lst
-*/27 * * * * /root/proxine/proxine.sh https > /root/tmp/https.lst
-*/28 * * * * /root/proxine/proxine.sh socks4 > /root/tmp/socks4.lst
-*/29 * * * * /root/proxine/proxine.sh socks5 > /root/tmp/socks5.lst
-```
 
 ## Proxy Sources
 
