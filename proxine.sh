@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ $# -eq 0 ]; then
    echo ""
    echo "  Author ozgurkoca: github.com/enseitankado/"
