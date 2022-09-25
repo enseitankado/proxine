@@ -72,3 +72,40 @@ proxyscan.io | *1 provider
 
 You can check proxy list in Windows env. with [EliteProxySwitcher](https://www.eliteproxyswitcher.com/). EPS also has auto switch feature to change active proxy periodicaly.
 [Open Proxy Checker](https://openproxy.space/software/proxy-checker) is good alternative for Windows to check proxies. [Proxy profiler](https://github.com/enseitankado/proxy-profiler) to test and profile large proxy lists.
+
+# Scheduled Script (Proxine + Proxy Profiler)
+
+```powershell
+cd /home/pi/proxine
+
+./proxine.sh socks5 | php /home/pi/proxy-profiler/proxyprof.php -t socks5 -l 1 -g -o /home/pi/proxine/socks5.txt -s
+git add .; git commit -m "`cat socks5.txt | wc -l` working elite proxies added."; git push
+
+./proxine.sh socks4 | php /home/pi/proxy-profiler/proxyprof.php -t socks4 -l 1 -g -o /home/pi/proxine/socks4.txt -s
+git add .; git commit -m "`cat socks4.txt | wc -l` working elite proxies added."; git push
+
+./proxine.sh https | php /home/pi/proxy-profiler/proxyprof.php -t https -l 1 -g -o /home/pi/proxine/https.txt -n 1000 -s
+git add .; git commit -m "`cat https.txt | wc -l` working elite proxies added."; git push
+
+./proxine.sh http | php /home/pi/proxy-profiler/proxyprof.php -t http -l 1 -g -o /home/pi/proxine/http.txt -n 1000 -s
+git add .; git commit -m "`cat http.txt | wc -l` working elite proxies added."; git push;
+```
+
+# Disclaimer
+
+This is an open source for everyone, you may redistribute, modify, use patents and use privately without any obligation to redistribute. but it should be noted to include the source code of the library that was modified (not the source code of the entire program), include the license, include the original copyright of the author (Özgür Koca), and include any changes made (if modified). Users do not have the right to sue the creator when there is damage to the software or even demand if there is a problem caused by the makers of this tool. because every risk is caused by the user risk itself.
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=enseitankado/proxine&type=Date)](https://star-history.com/#enseitankado/proxine&Date)
+
+# Donation
+
+Would you like to buy me a coffee? [Click](https://www.buymeacoffee.com/ozgurkoca).
+
+# Author
+
+I'm Özgür. I'm a teacher at a vocational [school](https://samsuneml.meb.k12.tr/)
+Repos: https://github.com/enseitankado
+Blog: www.tankado.com
