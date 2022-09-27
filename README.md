@@ -1,4 +1,4 @@
-# Proxine: Only FAST and ELITE (LEVEL-1) PROXIES
+# 🚀 Proxine: Only FAST and ELITE (LEVEL-1) PROXIES
 
 Periodically build fresh proxy list from more than 110 online sources, checks and merges into one list. This repo HAS ONLY ELITE (LEVEL 1) proxies. Filtering is performed by [Proxy Profiler](https://github.com/enseitankado/proxy-profiler). 
 
@@ -35,7 +35,7 @@ curl, python3
 
 ------------------------------------------------------------
 
-## Proxy Sources
+## 🔎 Proxy Sources
 
  Proxine uses a lot of provider:
 
@@ -57,12 +57,21 @@ mertguvencli@github | *1 provider
 RX4095@github | *1 provider
 officialputuid@github | *1 provider
 sunny9577@github | *1 provider
+arunsakthivel96@github | *1 provider
+rx443@github | *1 provider
 pubproxy.com | *1 provider
-arunsakthivel96 | *1 provider
 proxyspace.pro | *1 provider
 ipaddress.com | *1 provider
 httptunnel.ge | *1 provider
 proxyscan.io | *1 provider
+proxylists.net | *1 provider
+proxyscrape.com | *1 provider
+rdavydov | *1 provider 
+spys.me | *1 provider
+free-proxy-list.net | *1 provider
+google-proxy.net | *1 provider
+socks-proxy.net | *1 provider
+sslproxies.org | *1 provider
 
 * Highly possible multiple provider which undisclosed by project owner.
 
@@ -100,12 +109,13 @@ This is an open source for everyone, you may redistribute, modify, use patents a
 
 [![Star History Chart](https://api.star-history.com/svg?repos=enseitankado/proxine&type=Date)](https://star-history.com/#enseitankado/proxine&Date)
 
-# Donation
-
-Would you like to buy me a coffee? [Click](https://www.buymeacoffee.com/ozgurkoca).
-
 # Author
 
 I'm Özgür. I'm a teacher at a vocational [school](https://samsuneml.meb.k12.tr/)
 Repos: https://github.com/enseitankado
 Blog: www.tankado.com
+
+# Donation
+
+Would you like to buy me a coffee? [Click](https://www.buymeacoffee.com/ozgurkoca).
+

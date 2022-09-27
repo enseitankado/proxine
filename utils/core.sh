@@ -43,6 +43,18 @@ do
 		curl -s "https://www.proxyscan.io/download?type=http"
 		printf "\n"
 		curl -s "http://pubproxy.com/api/proxy?limit=20&format=txt"
+		printf "\n"
+		curl -s "http://www.proxylists.net/http_highanon.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/rx443/proxy-list/main/online/http.txt"
+		printf "\n"
+		curl -s "https://api.proxyscrape.com/?request=getproxies&proxytype=http&country=all&ssl=all&anonymity=all"
+		printf "\n"
+		curl -s "https://free-proxy-list.net/anonymous-proxy.html" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+		printf "\n"
+		curl -s "https://www.google-proxy.net/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies_anonymous/http.txt"
 	;;
 	"https")
 		printf "\n"
@@ -83,6 +95,14 @@ do
 		curl -s "https://www.proxyscan.io/download?type=http"
 		printf "\n"
 		curl -s "http://pubproxy.com/api/proxy?limit=20&format=txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/rx443/proxy-list/main/online/https.txt"		
+		printf "\n"
+		curl -s "https://api.proxyscrape.com/?request=getproxies&proxytype=https&country=all&ssl=all&anonymity=all"
+		printf "\n"
+		curl -s "https://www.google-proxy.net/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+		printf "\n"
+		curl -s "https://www.sslproxies.org/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
 	;;
 	"socks4")
 		printf "\n"
@@ -107,6 +127,14 @@ do
 		curl -s "https://raw.githubusercontent.com/saisuiu/uiu/main/free.txt"
 		printf "\n"
 		curl -s "https://www.proxyscan.io/download?type=socks4"
+		printf "\n"
+		curl -s "https://api.proxyscrape.com/?request=getproxies&proxytype=socks4&country=all&ssl=all&anonymity=all"
+		printf "\n"
+		curl -s "https://spys.me/proxy.txt" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+		printf "\n"
+		curl -s "https://www.socks-proxy.net/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies_anonymous/socks4.txt"
 	;;
 	"socks5")
 		printf "\n"
@@ -133,6 +161,12 @@ do
 		curl -s "https://proxyspace.pro/socks5.txt"
 		printf "\n"
 		curl -s "https://www.proxyscan.io/download?type=socks5"
+		printf "\n"
+		curl -s "https://api.proxyscrape.com/?request=getproxies&proxytype=socks5&country=all&ssl=all&anonymity=all"
+		printf "\n"
+		curl -s "https://spys.me/proxy.txt" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies_anonymous/socks5.txt"
 	;;
 	*)
 	;;
