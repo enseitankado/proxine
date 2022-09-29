@@ -1,4 +1,4 @@
-# 🚀 Proxine: Only FAST and ELITE (LEVEL-1) PROXIES
+# 🚀 Proxine: Only FAST + ELITE (LEVEL-1) PROXIES
 
 Periodically build fresh proxy list from more than 110 online sources, checks and merges into one list. This repo HAS ONLY ELITE (LEVEL 1) proxies. Filtering is performed by [Proxy Profiler](https://github.com/enseitankado/proxy-profiler). 
 
