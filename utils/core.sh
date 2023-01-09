@@ -55,6 +55,10 @@ do
 		curl -s "https://www.google-proxy.net/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies_anonymous/http.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/zevtyardt/proxy-list/main/http.txt"
 	;;
 	"https")
 		printf "\n"
@@ -135,6 +139,10 @@ do
 		curl -s "https://www.socks-proxy.net/" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies_anonymous/socks4.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/zevtyardt/proxy-list/main/socks4.txt"
 	;;
 	"socks5")
 		printf "\n"
@@ -167,6 +175,10 @@ do
 		curl -s "https://spys.me/proxy.txt" | sed -e 's/<[^>]*>//g' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}:[0-9]\{2,4\}'
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies_anonymous/socks5.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/zevtyardt/proxy-list/main/socks5.txt"
 	;;
 	*)
 	;;

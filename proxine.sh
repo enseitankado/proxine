@@ -2,9 +2,10 @@
 
 if [ $# -eq 0 ]; then
    echo ""
-   echo "  Author ozgurkoca: github.com/enseitankado/"
+   echo "  What is it: Collect fresh proxy list from tens of unique sources,"
+   echo "  and sorts as unique records. github.com/enseitankado/"
    echo ""
-   echo "      Usage: ./proxine.sh http/https/socks4/socks5"
+   echo "      Usage: ./proxine.sh <http/https/socks4/socks5>"
    echo ""
    echo "    Example: ./proxine.sh http"
    echo ""

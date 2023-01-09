@@ -72,6 +72,8 @@ free-proxy-list.net | *1 provider
 google-proxy.net | *1 provider
 socks-proxy.net | *1 provider
 sslproxies.org | *1 provider
+zevtyardt | *1 provider
+TheSpeedX | *1 provider
 
 * Highly possible multiple provider which undisclosed by project owner.
 
