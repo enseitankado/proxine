@@ -2,7 +2,7 @@
 
 Periodically build fresh proxy list from more than 110 online sources, checks and merges into one list. This repo HAS ONLY ELITE (LEVEL 1) proxies. Filtering is performed by [Proxy Profiler](https://github.com/enseitankado/proxy-profiler). 
 
- Update Frequency: ```Every 30 minutes```
+ Update Frequency: ```Every 2 hours```
 
 ## Contains Proxies of over 110 Providers and is updated regularely
 
@@ -87,19 +87,35 @@ You can check proxy list in Windows env. with [EliteProxySwitcher](https://www.e
 # Scheduled Script (Proxine + Proxy Profiler)
 
 ```powershell
+#!/bin/bash
 cd /home/pi/proxine
 
-./proxine.sh socks5 | php /home/pi/proxy-profiler/proxyprof.php -t socks5 -l 1 -g -o /home/pi/proxine/socks5.txt -s
-git add .; git commit -m "`cat socks5.txt | wc -l` working elite proxies added."; git push
+# Only Level-1 good proxies
+./proxine.sh socks5 | php /home/pi/proxy-profiler/proxyprof.php -t socks5 -l 1 -g -o proxy/socks5.txt -s -e -n 500
+git add .; git commit -m "`cat proxy/socks5.txt | wc -l` working elite socks5 proxies added."; git push -f
 
-./proxine.sh socks4 | php /home/pi/proxy-profiler/proxyprof.php -t socks4 -l 1 -g -o /home/pi/proxine/socks4.txt -s
-git add .; git commit -m "`cat socks4.txt | wc -l` working elite proxies added."; git push
+./proxine.sh socks4 | php /home/pi/proxy-profiler/proxyprof.php -t socks4 -l 1 -g -o proxy/socks4.txt -s -e -n 500
+git add .; git commit -m "`cat proxy/socks4.txt | wc -l` working elite socks4 proxies added."; git push -f
 
-./proxine.sh https | php /home/pi/proxy-profiler/proxyprof.php -t https -l 1 -g -o /home/pi/proxine/https.txt -n 1000 -s
-git add .; git commit -m "`cat https.txt | wc -l` working elite proxies added."; git push
+./proxine.sh https | php /home/pi/proxy-profiler/proxyprof.php -t https -l 1 -g -o proxy/https.txt -n 1000 -s -e
+git add .; git commit -m "`cat proxy/https.txt | wc -l` working elite https proxies added."; git push -f
 
-./proxine.sh http | php /home/pi/proxy-profiler/proxyprof.php -t http -l 1 -g -o /home/pi/proxine/http.txt -n 1000 -s
-git add .; git commit -m "`cat http.txt | wc -l` working elite proxies added."; git push;
+./proxine.sh http | php /home/pi/proxy-profiler/proxyprof.php -t http -l 1 -g -o proxy/http.txt -n 1000 -s -e
+git add .; git commit -m "`cat proxy/http.txt | wc -l` working elite http proxies added."; git push -f
+
+
+# CloudFlare approved Level-1 proxies
+php /home/pi/proxy-profiler/proxyprof.php -f proxy/socks5.txt -t socks5 -o proxy-cloudflare-pass/socks5.txt -s -a https://www.tankado.com/ -y 3 -c 5 -e -g
+git add .; git commit -m "`cat proxy-cloudflare-pass/socks5.txt | wc -l` CloudFlare approved elite socks5 proxies added."; git push -f
+
+php /home/pi/proxy-profiler/proxyprof.php -f proxy/socks4.txt -t socks4 -o proxy-cloudflare-pass/socks4.txt -s -a https://www.tankado.com/ -y 3 -c 5 -e -g
+git add .; git commit -m "`cat proxy-cloudflare-pass/socks4.txt | wc -l` CloudFlare approved elite socks4 proxies added."; git push -f
+
+php /home/pi/proxy-profiler/proxyprof.php -f proxy/https.txt -t https -o proxy-cloudflare-pass/https.txt -n 1000 -s -a https://www.tankado.com/ -y 3 -c 5 -e -g
+git add .; git commit -m "`cat proxy-cloudflare-pass/https.txt | wc -l` CloudFlare approved elite https proxies added."; git push -f
+
+php /home/pi/proxy-profiler/proxyprof.php -f proxy/http.txt -t http -o proxy-cloudflare-pass/http.txt -n 1000 -s -a https://www.tankado.com/ -y 3 -c 5 -e -g
+git add .; git commit -m "`cat proxy-cloudflare-pass/http.txt | wc -l` CloudFlare approved elite http proxies added."; git push -f
 ```
 
 # Disclaimer
