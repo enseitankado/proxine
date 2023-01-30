@@ -3,7 +3,8 @@ max_secs=$((120*60))
 retry_count=1
 time_out=4
 
-sort proxy/http.txt | uniq -u > proxy/http.txt
+sort -u proxy/http.txt -o proxy/http.txt
+
 proxy_count=`cat proxy/http.txt | wc -l`
 duration=$(( $proxy_count * $retry_count * $time_out))
 thread_count=$(( ($duration + $max_secs + 1) / $max_secs))
