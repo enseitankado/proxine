@@ -10,7 +10,7 @@ Periodically build fresh proxy list from more than 110 online sources, checks an
 [![Commits](https://img.shields.io/github/commit-activity/w/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/commits/master)
 [![Issues](https://img.shields.io/github/issues/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/issues)
 [![Stargazers](https://img.shields.io/github/stars/enseitankado/awesome-proxies?style=flat&logo=github)](https://github.com/enseitankado/awesome-proxies/stargazers)
-
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/OzgurKoca2.svg?style=social&label=Follow%20%40OzgurKoca)](https://twitter.com/OzgurKoca2)
 ------------------------------------------------------------
 
 ## Requirements
