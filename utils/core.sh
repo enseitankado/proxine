@@ -59,6 +59,8 @@ do
 		curl -s "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt"
 		printf "\n"
 		curl -s "https://raw.githubusercontent.com/zevtyardt/proxy-list/main/http.txt"
+		printf "\n"
+		curl -s "https://raw.githubusercontent.com/stamparm/aux/master/fetch-some-list.txt" | python3 utils/parsestamparm.py http
 	;;
 	"https")
 		printf "\n"
