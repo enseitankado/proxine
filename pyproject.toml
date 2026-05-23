@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proxine"
+version = "2.0.0"
+description = "Birden çok açık kaynaktan benzersiz proxy listesi toplayan tek-dosya araç."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Özgür Koca", email = "ozgurkoca@gmail.com"}]
+keywords = ["proxy", "http", "https", "socks4", "socks5", "scraper"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Internet :: Proxy Servers",
+]
+dependencies = []  # stdlib-only
+
+[project.scripts]
+proxine = "proxine:main"
+
+[project.urls]
+Homepage = "https://github.com/enseitankado/proxine"
+Issues = "https://github.com/enseitankado/proxine/issues"
+
+[tool.setuptools]
+py-modules = ["proxine", "sources"]
