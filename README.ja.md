@@ -64,43 +64,46 @@ Token（ソースの新鮮度を解決するため — 下記参照）。
 ## 使い方
 
 ```bash
-./proxine.py <http|https|socks4|socks5> [オプション]
+./proxine.py -p <http|https|socks4|socks5> [オプション]
 ```
 
 ### フラグ
 
 | ロング | ショート | デフォルト | 説明 |
 |---|---|---|---|
+| `--protocol` | `-p` | — | **必須。** 採集するプロトコル: `http`、`https`、`socks4`、`socks5`。 |
 | `--format` | `-f` | `ip-port` | 出力形式。`url` で `<proto>://IP:PORT`。 |
 | `--timeout` | `-t` | `15` | ソース毎の HTTP タイムアウト（秒）。 |
 | `--concurrency` | `-c` | `1` | 並列リクエスト数。多いほど速くソケット消費も増加。 |
 | `--retries` | `-r` | `2` | 失敗ソース毎のリトライ回数。 |
+| `--max-ports` | `-m` | `5` | 1 つの IP が N 個以上の異なるポートで現れたら完全に削除（ポートスキャナ/ハニーポット除去）。`0` で無効化。 |
 | `--fresh` | `-F` | `86400` | N 秒より古いソースを除外。`0` で無効化。 |
 | `--github-token` | `-g` | — | GitHub PAT。なければ `$GITHUB_TOKEN`、次に `gh auth token`。 |
 | `--output` | `-o` | — | プロキシリストを FILE に書き込み；stdout は空。 |
-| `--verbose` | `-v` | — | 各ソースの結果を行単位でログ。 |
+| `--lang` | `-L` | 自動 | UI 言語: `tr`、`en`、`de`、`es`、`ru`、`zh`。指定なしなら `$PROXINE_LANG`/`$LANG`/ロケールから自動検出。 |
+| `--strict-ports` / `--no-strict-ports` | — | 有効 | 宣言されたプロトコルファミリに合わないポートのプロキシを削除（例: SOCKS 宣言のポート 80）。 |
 | `--silent` | `-s` | — | すべての stderr 出力を抑制。 |
 
 ### 例
 
 ```bash
 # HTTPS プロキシを stdout へ（デフォルト鮮度フィルタ: 24h）
-./proxine.py https
+./proxine.py -p https
 
 # SOCKS5 リストをファイルへ、高速化
-./proxine.py socks5 -c 32 -o socks5.lst
+./proxine.py -p socks5 -c 32 -o socks5.lst
 
 # 直近 1 時間に更新されたソースのみ
-./proxine.py http -F 3600
+./proxine.py -p http -F 3600
 
 # URL 形式出力: socks5://1.2.3.4:1080
-./proxine.py socks5 -f url
+./proxine.py -p socks5 -f url
 
 # 静音モード — パイプライン向け
-./proxine.py http -s | grep '^192\.'
+./proxine.py -p http -s | grep '^192\.'
 
 # Proxy Profiler と連鎖
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ### GitHub トークン（任意、推奨）
@@ -115,14 +118,14 @@ API で解決されます。**匿名制限は 60 リクエスト/時**で、1 �
 
 ```bash
 # 1) 明示的なフラグ
-./proxine.py socks5 -g ghp_xxx
+./proxine.py -p socks5 -g ghp_xxx
 
 # 2) 環境変数
 export GITHUB_TOKEN=ghp_xxx
-./proxine.py socks5
+./proxine.py -p socks5
 
 # 3) 何もしない — `gh` CLI がインストール済み・認証済みなら自動取得
-./proxine.py socks5
+./proxine.py -p socks5
 ```
 
 レート制限や無効トークンの場合、レポート末尾に明確な警告が表示されます。
@@ -186,11 +189,10 @@ export GITHUB_TOKEN=ghp_xxx
 
 | コマンド | stdout | stderr |
 |---|---|---|
-| `proxine http` | プロキシリスト | プログレス → 状態テーブル → サマリー |
-| `proxine http -v` | プロキシリスト | 行単位ログ → テーブル |
-| `proxine http -o f.lst` | （空） | プログレス → テーブル |
-| `proxine http -s` | プロキシリスト | （空） |
-| `proxine http -o f.lst -s` | （空） | （空） |
+| `proxine -p http` | プロキシリスト | ソース別ログ + プログレス → 状態テーブル → サマリー |
+| `proxine -p http -o f.lst` | （空） | ソース別ログ + プログレス → テーブル |
+| `proxine -p http -s` | プロキシリスト | （空） |
+| `proxine -p http -o f.lst -s` | （空） | （空） |
 
 ------------------------------------------------------------
 
@@ -279,10 +281,10 @@ systemd-timer / GitHub Actions でラップしてください。パイプライ�
 
 ```bash
 # Cron: 1 時間毎に SOCKS5 リストを更新
-0 * * * * cd ~/proxine && ./proxine.py socks5 -s -o /var/lib/proxies/socks5.lst
+0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
 # Proxy Profiler と連鎖（生存確認 + elite テスト）
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ------------------------------------------------------------

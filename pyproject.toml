@@ -27,4 +27,4 @@ Homepage = "https://github.com/enseitankado/proxine"
 Issues = "https://github.com/enseitankado/proxine/issues"
 
 [tool.setuptools]
-py-modules = ["proxine", "sources"]
+py-modules = ["proxine", "sources", "i18n"]

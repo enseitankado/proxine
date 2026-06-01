@@ -66,43 +66,46 @@ access token (для определения возраста источнико�
 ## Использование
 
 ```bash
-./proxine.py <http|https|socks4|socks5> [параметры]
+./proxine.py -p <http|https|socks4|socks5> [параметры]
 ```
 
 ### Параметры
 
 | Длинный | Краткий | По умолчанию | Описание |
 |---|---|---|---|
+| `--protocol` | `-p` | — | **Обязательно.** Протокол для сбора: `http`, `https`, `socks4`, `socks5`. |
 | `--format` | `-f` | `ip-port` | Формат вывода. `url` даёт `<proto>://IP:PORT`. |
 | `--timeout` | `-t` | `15` | HTTP-таймаут на источник (секунды). |
 | `--concurrency` | `-c` | `1` | Параллельные запросы. Больше = быстрее + больше сокетов. |
 | `--retries` | `-r` | `2` | Число повторов при ошибке источника. |
+| `--max-ports` | `-m` | `5` | Полностью отбросить IP, если он встречается на более чем N разных портах (фильтр сканеров портов/honeypot). `0` отключает. |
 | `--fresh` | `-F` | `86400` | Источники старше N секунд отбрасываются. `0` отключает фильтр. |
 | `--github-token` | `-g` | — | GitHub PAT. Иначе `$GITHUB_TOKEN`, затем `gh auth token`. |
 | `--output` | `-o` | — | Записать список прокси в FILE; stdout остаётся пустым. |
-| `--verbose` | `-v` | — | Логировать результат каждого источника построчно. |
+| `--lang` | `-L` | авто | Язык интерфейса: `tr`, `en`, `de`, `es`, `ru`, `zh`. Иначе автоопределение из `$PROXINE_LANG`/`$LANG`/локали. |
+| `--strict-ports` / `--no-strict-ports` | — | вкл | Отбрасывать прокси, чей порт не соответствует объявленному семейству протоколов (напр. SOCKS на порту 80). |
 | `--silent` | `-s` | — | Подавить весь вывод в stderr. |
 
 ### Примеры
 
 ```bash
 # Прокси HTTPS в stdout (фильтр актуальности по умолчанию: 24 ч)
-./proxine.py https
+./proxine.py -p https
 
 # Список SOCKS5 в файл, быстрее
-./proxine.py socks5 -c 32 -o socks5.lst
+./proxine.py -p socks5 -c 32 -o socks5.lst
 
 # Только источники, обновлённые за последний час
-./proxine.py http -F 3600
+./proxine.py -p http -F 3600
 
 # Вывод в формате URL: socks5://1.2.3.4:1080
-./proxine.py socks5 -f url
+./proxine.py -p socks5 -f url
 
 # Тихий режим — идеально для пайплайнов
-./proxine.py http -s | grep '^192\.'
+./proxine.py -p http -s | grep '^192\.'
 
 # Цепочка с Proxy Profiler
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ### GitHub-токен (необязательный, но рекомендуется)
@@ -117,14 +120,14 @@ GitHub raw URLs не возвращают `Last-Modified`, поэтому воз
 
 ```bash
 # 1) Явный параметр
-./proxine.py socks5 -g ghp_xxx
+./proxine.py -p socks5 -g ghp_xxx
 
 # 2) Переменная окружения
 export GITHUB_TOKEN=ghp_xxx
-./proxine.py socks5
+./proxine.py -p socks5
 
 # 3) Ничего — если установлен и авторизован `gh` CLI
-./proxine.py socks5
+./proxine.py -p socks5
 ```
 
 При срабатывании лимита или недействительном токене в конце отчёта
@@ -189,11 +192,10 @@ export GITHUB_TOKEN=ghp_xxx
 
 | Команда | stdout | stderr |
 |---|---|---|
-| `proxine http` | список прокси | прогресс → таблица → сводка |
-| `proxine http -v` | список прокси | построчный лог → таблицы |
-| `proxine http -o f.lst` | (пусто) | прогресс → таблицы |
-| `proxine http -s` | список прокси | (пусто) |
-| `proxine http -o f.lst -s` | (пусто) | (пусто) |
+| `proxine -p http` | список прокси | построчный лог + прогресс → таблица → сводка |
+| `proxine -p http -o f.lst` | (пусто) | построчный лог + прогресс → таблицы |
+| `proxine -p http -s` | список прокси | (пусто) |
+| `proxine -p http -o f.lst -s` | (пусто) | (пусто) |
 
 ------------------------------------------------------------
 
@@ -282,10 +284,10 @@ Proxine спроектирован под разовый запуск; для р
 
 ```bash
 # Cron: обновлять список SOCKS5 каждый час
-0 * * * * cd ~/proxine && ./proxine.py socks5 -s -o /var/lib/proxies/socks5.lst
+0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
 # Цепочка с Proxy Profiler (проверка живучести + elite-тест)
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ------------------------------------------------------------

@@ -66,43 +66,46 @@ chmod +x proxine.py
 ## الاستخدام
 
 ```bash
-./proxine.py <http|https|socks4|socks5> [خيارات]
+./proxine.py -p <http|https|socks4|socks5> [خيارات]
 ```
 
 ### الأعلام
 
 | الطويل | القصير | الافتراضي | الوصف |
 |---|---|---|---|
+| `--protocol` | `-p` | — | **إلزامي.** البروتوكول المطلوب جمعه: `http`، `https`، `socks4`، `socks5`. |
 | `--format` | `-f` | `ip-port` | تنسيق الخرج. `url` يُنتج `<proto>://IP:PORT`. |
 | `--timeout` | `-t` | `15` | مهلة HTTP لكل مصدر (ثواني). |
 | `--concurrency` | `-c` | `1` | عدد الطلبات المتوازية. أعلى = أسرع + سوكتات أكثر. |
 | `--retries` | `-r` | `2` | محاولات إعادة لكل مصدر فاشل. |
+| `--max-ports` | `-m` | `5` | إسقاط IP بالكامل إذا ظهر على أكثر من N منفذاً مختلفاً (فلتر ماسحات المنافذ/honeypot). `0` يُعطِّل. |
 | `--fresh` | `-F` | `86400` | إسقاط المصادر الأقدم من N ثانية. `0` يُعطِّل. |
 | `--github-token` | `-g` | — | GitHub PAT. بدونه `$GITHUB_TOKEN`، ثم `gh auth token`. |
 | `--output` | `-o` | — | كتابة قائمة البروكسي إلى FILE؛ stdout يبقى فارغاً. |
-| `--verbose` | `-v` | — | تسجيل نتيجة كل مصدر سطراً بسطر. |
+| `--lang` | `-L` | تلقائي | لغة الواجهة: `tr`، `en`، `de`، `es`، `ru`، `zh`. وإلا يُكتشف تلقائياً من `$PROXINE_LANG`/`$LANG`/المنطقة. |
+| `--strict-ports` / `--no-strict-ports` | — | مفعَّل | إسقاط البروكسيات التي لا يتطابق منفذها مع عائلة البروتوكول المُعلَنة (مثلاً SOCKS مُعلَن على المنفذ 80). |
 | `--silent` | `-s` | — | كتم كل خرج stderr. |
 
 ### أمثلة
 
 ```bash
 # بروكسيات HTTPS إلى stdout (مرشح الحداثة الافتراضي: 24 ساعة)
-./proxine.py https
+./proxine.py -p https
 
 # قائمة SOCKS5 إلى ملف، أسرع
-./proxine.py socks5 -c 32 -o socks5.lst
+./proxine.py -p socks5 -c 32 -o socks5.lst
 
 # فقط المصادر المُحدَّثة في آخر ساعة
-./proxine.py http -F 3600
+./proxine.py -p http -F 3600
 
 # خرج بصيغة URL: socks5://1.2.3.4:1080
-./proxine.py socks5 -f url
+./proxine.py -p socks5 -f url
 
 # الوضع الصامت — مثالي لخطوط الأنابيب
-./proxine.py http -s | grep '^192\.'
+./proxine.py -p http -s | grep '^192\.'
 
 # سلسلة مع Proxy Profiler
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ### رمز GitHub (اختياري لكن موصى به)
@@ -116,14 +119,14 @@ GitHub، لذا بدون رمز تظهر معظم الأعمار كـ «LIVE». 
 
 ```bash
 # 1) علم صريح
-./proxine.py socks5 -g ghp_xxx
+./proxine.py -p socks5 -g ghp_xxx
 
 # 2) متغير بيئة
 export GITHUB_TOKEN=ghp_xxx
-./proxine.py socks5
+./proxine.py -p socks5
 
 # 3) لا شيء — إذا كان `gh` CLI مثبتاً ومُسجَّل الدخول
-./proxine.py socks5
+./proxine.py -p socks5
 ```
 
 إذا تجاوز الرمز الحد أو كان غير صالح، يظهر تحذير واضح في نهاية التقرير.
@@ -187,11 +190,10 @@ export GITHUB_TOKEN=ghp_xxx
 
 | الأمر | stdout | stderr |
 |---|---|---|
-| `proxine http` | قائمة البروكسي | تقدم → جدول الحالة → ملخص |
-| `proxine http -v` | قائمة البروكسي | سجل سطر بسطر → جداول |
-| `proxine http -o f.lst` | (فارغ) | تقدم → جداول |
-| `proxine http -s` | قائمة البروكسي | (فارغ) |
-| `proxine http -o f.lst -s` | (فارغ) | (فارغ) |
+| `proxine -p http` | قائمة البروكسي | سجل لكل مصدر + تقدم → جدول الحالة → ملخص |
+| `proxine -p http -o f.lst` | (فارغ) | سجل لكل مصدر + تقدم → جداول |
+| `proxine -p http -s` | قائمة البروكسي | (فارغ) |
+| `proxine -p http -o f.lst -s` | (فارغ) | (فارغ) |
 
 ------------------------------------------------------------
 
@@ -279,10 +281,10 @@ systemd-timer / GitHub Actions. لخطوط الأنابيب يُوصى بـ `-s`
 
 ```bash
 # Cron: تحديث قائمة SOCKS5 كل ساعة
-0 * * * * cd ~/proxine && ./proxine.py socks5 -s -o /var/lib/proxies/socks5.lst
+0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
 # سلسلة مع Proxy Profiler (فحص الحياة + اختبار elite)
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ------------------------------------------------------------

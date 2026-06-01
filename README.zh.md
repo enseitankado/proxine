@@ -61,43 +61,46 @@ chmod +x proxine.py
 ## 用法
 
 ```bash
-./proxine.py <http|https|socks4|socks5> [选项]
+./proxine.py -p <http|https|socks4|socks5> [选项]
 ```
 
 ### 参数
 
 | 长 | 短 | 默认 | 说明 |
 |---|---|---|---|
+| `--protocol` | `-p` | — | **必填。** 要采集的协议:`http`、`https`、`socks4`、`socks5`。 |
 | `--format` | `-f` | `ip-port` | 输出格式。`url` 产生 `<proto>://IP:PORT`。 |
 | `--timeout` | `-t` | `15` | 每源 HTTP 超时(秒)。 |
 | `--concurrency` | `-c` | `1` | 并行请求数。越高越快,占用更多套接字。 |
 | `--retries` | `-r` | `2` | 单源失败重试次数。 |
+| `--max-ports` | `-m` | `5` | 若一个 IP 出现在超过 N 个不同端口,则整体丢弃(端口扫描器/蜜罐过滤)。`0` 禁用。 |
 | `--fresh` | `-F` | `86400` | 丢弃超过 N 秒的源。`0` 关闭过滤。 |
 | `--github-token` | `-g` | — | GitHub PAT。否则使用 `$GITHUB_TOKEN`,再尝试 `gh auth token`。 |
 | `--output` | `-o` | — | 将代理列表写入 FILE;stdout 保持空。 |
-| `--verbose` | `-v` | — | 逐行记录每个源的结果。 |
+| `--lang` | `-L` | 自动 | 界面语言:`tr`、`en`、`de`、`es`、`ru`、`zh`。否则从 `$PROXINE_LANG`/`$LANG`/区域自动检测。 |
+| `--strict-ports` / `--no-strict-ports` | — | 启用 | 丢弃端口不符合声明协议族的代理(例如声明为 SOCKS 但在 80 端口)。 |
 | `--silent` | `-s` | — | 抑制所有 stderr 输出。 |
 
 ### 示例
 
 ```bash
 # HTTPS 代理输出到 stdout(默认新鲜度过滤:24 小时)
-./proxine.py https
+./proxine.py -p https
 
 # SOCKS5 列表写入文件,更快
-./proxine.py socks5 -c 32 -o socks5.lst
+./proxine.py -p socks5 -c 32 -o socks5.lst
 
 # 仅最近一小时内更新的源
-./proxine.py http -F 3600
+./proxine.py -p http -F 3600
 
 # URL 形式输出:socks5://1.2.3.4:1080
-./proxine.py socks5 -f url
+./proxine.py -p socks5 -f url
 
 # 静默模式 —— 适合管道
-./proxine.py http -s | grep '^192\.'
+./proxine.py -p http -s | grep '^192\.'
 
 # 与 Proxy Profiler 串联
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ### GitHub 令牌(可选但推荐)
@@ -111,14 +114,14 @@ GitHub raw URL 不返回 `Last-Modified`,因此源年龄通过 GitHub API 解析
 
 ```bash
 # 1) 显式参数
-./proxine.py socks5 -g ghp_xxx
+./proxine.py -p socks5 -g ghp_xxx
 
 # 2) 环境变量
 export GITHUB_TOKEN=ghp_xxx
-./proxine.py socks5
+./proxine.py -p socks5
 
 # 3) 什么都不做 —— 若已安装并登录 `gh` CLI
-./proxine.py socks5
+./proxine.py -p socks5
 ```
 
 若令牌超限或无效,报告末尾会有明确警告。
@@ -182,11 +185,10 @@ export GITHUB_TOKEN=ghp_xxx
 
 | 命令 | stdout | stderr |
 |---|---|---|
-| `proxine http` | 代理列表 | 进度 → 状态表 → 摘要 |
-| `proxine http -v` | 代理列表 | 逐源日志 → 表格 |
-| `proxine http -o f.lst` | (空) | 进度 → 表格 |
-| `proxine http -s` | 代理列表 | (空) |
-| `proxine http -o f.lst -s` | (空) | (空) |
+| `proxine -p http` | 代理列表 | 逐源日志 + 进度 → 状态表 → 摘要 |
+| `proxine -p http -o f.lst` | (空) | 逐源日志 + 进度 → 表格 |
+| `proxine -p http -s` | 代理列表 | (空) |
+| `proxine -p http -o f.lst -s` | (空) | (空) |
 
 ------------------------------------------------------------
 
@@ -274,10 +276,10 @@ GitHub Actions 包装。管道使用时推荐 `-s` 与 `-o`:
 
 ```bash
 # Cron:每小时更新 SOCKS5 列表
-0 * * * * cd ~/proxine && ./proxine.py socks5 -s -o /var/lib/proxies/socks5.lst
+0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
 # 与 Proxy Profiler 串联(存活 + elite 测试)
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ------------------------------------------------------------

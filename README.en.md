@@ -64,43 +64,46 @@ access token (to resolve source ages — see below).
 ## Usage
 
 ```bash
-./proxine.py <http|https|socks4|socks5> [options]
+./proxine.py -p <http|https|socks4|socks5> [options]
 ```
 
 ### Flags
 
 | Long | Short | Default | Description |
 |---|---|---|---|
+| `--protocol` | `-p` | — | **Required.** Protocol to collect: `http`, `https`, `socks4`, `socks5`. |
 | `--format` | `-f` | `ip-port` | Output format. `url` produces `<proto>://IP:PORT`. |
 | `--timeout` | `-t` | `15` | Per-source HTTP timeout (seconds). |
 | `--concurrency` | `-c` | `1` | Number of parallel requests. Higher = faster + more sockets. |
 | `--retries` | `-r` | `2` | Retry attempts per failed source. |
+| `--max-ports` | `-m` | `5` | Drop an IP entirely if it appears on more than N distinct ports (port-scanner/honeypot filter). `0` disables. |
 | `--fresh` | `-F` | `86400` | Drop sources older than this many seconds. `0` disables the filter. |
 | `--github-token` | `-g` | — | GitHub PAT. Falls back to `$GITHUB_TOKEN`, then `gh auth token`. |
 | `--output` | `-o` | — | Write the proxy list to FILE; stdout stays empty. |
-| `--verbose` | `-v` | — | Log each source's result line by line. |
+| `--lang` | `-L` | auto | UI language: `tr`, `en`, `de`, `es`, `ru`, `zh`. Otherwise auto-detected from `$PROXINE_LANG`/`$LANG`/locale. |
+| `--strict-ports` / `--no-strict-ports` | — | on | Drop proxies whose port doesn't match the declared protocol family (e.g. a SOCKS-declared proxy on port 80 is dropped). |
 | `--silent` | `-s` | — | Suppress all stderr output. |
 
 ### Examples
 
 ```bash
 # HTTPS proxies to stdout (default freshness filter: 24h)
-./proxine.py https
+./proxine.py -p https
 
 # SOCKS5 list to a file, faster
-./proxine.py socks5 -c 32 -o socks5.lst
+./proxine.py -p socks5 -c 32 -o socks5.lst
 
 # Only sources updated in the last hour
-./proxine.py http -F 3600
+./proxine.py -p http -F 3600
 
 # URL-style output: socks5://1.2.3.4:1080
-./proxine.py socks5 -f url
+./proxine.py -p socks5 -f url
 
 # Silent mode — ideal for pipelines
-./proxine.py http -s | grep '^192\.'
+./proxine.py -p http -s | grep '^192\.'
 
 # Chain with Proxy Profiler
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ### GitHub token (optional but recommended)
@@ -115,14 +118,14 @@ Three ways — Proxine picks the first available:
 
 ```bash
 # 1) Explicit flag
-./proxine.py socks5 -g ghp_xxx
+./proxine.py -p socks5 -g ghp_xxx
 
 # 2) Environment variable
 export GITHUB_TOKEN=ghp_xxx
-./proxine.py socks5
+./proxine.py -p socks5
 
 # 3) Nothing — if `gh` CLI is installed and authenticated
-./proxine.py socks5
+./proxine.py -p socks5
 ```
 
 If the token is rate-limited or invalid, a clear warning is shown at the end.
@@ -186,11 +189,10 @@ Sort order: OK (freshest first) → LIVE → STALE → FAIL.
 
 | Command | stdout | stderr |
 |---|---|---|
-| `proxine http` | proxy list | progress → status table → summary |
-| `proxine http -v` | proxy list | per-source log → tables |
-| `proxine http -o f.lst` | (empty) | progress → tables |
-| `proxine http -s` | proxy list | (empty) |
-| `proxine http -o f.lst -s` | (empty) | (empty) |
+| `proxine -p http` | proxy list | per-source log + progress → status table → summary |
+| `proxine -p http -o f.lst` | (empty) | per-source log + progress → tables |
+| `proxine -p http -s` | proxy list | (empty) |
+| `proxine -p http -o f.lst -s` | (empty) | (empty) |
 
 ------------------------------------------------------------
 
@@ -279,10 +281,10 @@ recommended:
 
 ```bash
 # Cron: update the SOCKS5 list every hour
-0 * * * * cd ~/proxine && ./proxine.py socks5 -s -o /var/lib/proxies/socks5.lst
+0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
 # Chain with Proxy Profiler (liveness + elite test)
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ------------------------------------------------------------

@@ -64,43 +64,46 @@ access token (kaynak yaşlarını çözmek için — aşağıya bkz.).
 ## Kullanım
 
 ```bash
-./proxine.py <http|https|socks4|socks5> [seçenekler]
+./proxine.py -p <http|https|socks4|socks5> [seçenekler]
 ```
 
 ### Bayraklar
 
 | Uzun | Kısa | Varsayılan | Açıklama |
 |---|---|---|---|
+| `--protocol` | `-p` | — | **Zorunlu.** Toplanacak protokol: `http`, `https`, `socks4`, `socks5`. |
 | `--format` | `-f` | `ip-port` | Çıktı biçimi. `url` seçilirse `<proto>://IP:PORT`. |
 | `--timeout` | `-t` | `15` | Kaynak başına HTTP timeout (saniye). |
 | `--concurrency` | `-c` | `1` | Eşzamanlı istek sayısı. Yüksek değer = daha hızlı, daha çok soket. |
 | `--retries` | `-r` | `2` | Başarısız kaynak başına tekrar deneme sayısı. |
+| `--max-ports` | `-m` | `5` | Bir IP bu kadardan fazla farklı portla görünürse tamamen at (port-scanner/honeypot eleme). `0` = devre dışı. |
 | `--fresh` | `-F` | `86400` | Bundan eski kaynaklar çıktıya katılmaz (saniye). `0` = filtre kapalı. |
 | `--github-token` | `-g` | — | GitHub PAT. Yoksa `$GITHUB_TOKEN`, o da yoksa `gh auth token` denenir. |
 | `--output` | `-o` | — | Proxy listesini bu dosyaya yaz; stdout boş kalır. |
-| `--verbose` | `-v` | — | Her kaynağın sonucunu satır satır göster. |
+| `--lang` | `-L` | otomatik | Arayüz dili: `tr`, `en`, `de`, `es`, `ru`, `zh`. Yoksa `$PROXINE_LANG`/`$LANG`/locale'den algılanır. |
+| `--strict-ports` / `--no-strict-ports` | — | açık | Beyan edilen protokol ailesine uymayan portlardaki proxy'leri at (örn. SOCKS olarak listelenmiş port 80 atılır). |
 | `--silent` | `-s` | — | Tüm stderr çıktısını sustur. |
 
 ### Örnekler
 
 ```bash
 # Stdout'a HTTPS proxy listesi (varsayılan tazelik filtresi 24h)
-./proxine.py https
+./proxine.py -p https
 
 # SOCKS5 listesini dosyaya yaz, hızı artır
-./proxine.py socks5 -c 32 -o socks5.lst
+./proxine.py -p socks5 -c 32 -o socks5.lst
 
 # Sadece son 1 saatte güncellenen kaynakları kullan
-./proxine.py http -F 3600
+./proxine.py -p http -F 3600
 
 # URL biçiminde çıktı: socks5://1.2.3.4:1080
-./proxine.py socks5 -f url
+./proxine.py -p socks5 -f url
 
 # Sessiz mod — boru hattı için ideal
-./proxine.py http -s | grep '^192\.'
+./proxine.py -p http -s | grep '^192\.'
 
 # Proxy Profiler ile zincirle
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ### GitHub token (opsiyonel ama önerilir)
@@ -115,14 +118,14 @@ public read yeterlidir.
 
 ```bash
 # 1) Açık parametre
-./proxine.py socks5 -g ghp_xxx
+./proxine.py -p socks5 -g ghp_xxx
 
 # 2) Env değişkeni
 export GITHUB_TOKEN=ghp_xxx
-./proxine.py socks5
+./proxine.py -p socks5
 
 # 3) Hiçbir şey yapmayın — `gh` CLI yüklü ve giriş yapılmışsa
-./proxine.py socks5
+./proxine.py -p socks5
 ```
 
 Token rate-limit'e takılır veya geçersizse rapor sonunda açık uyarı görürsünüz.
@@ -186,11 +189,10 @@ Sıralama: OK (en taze üstte) → LIVE → STALE → FAIL.
 
 | Komut | stdout | stderr |
 |---|---|---|
-| `proxine http` | proxy listesi | progress → durum tablosu → özet |
-| `proxine http -v` | proxy listesi | satır satır log → tablolar |
-| `proxine http -o f.lst` | (boş) | progress → tablolar |
-| `proxine http -s` | proxy listesi | (boş) |
-| `proxine http -o f.lst -s` | (boş) | (boş) |
+| `proxine -p http` | proxy listesi | satır satır log + progress → durum tablosu → özet |
+| `proxine -p http -o f.lst` | (boş) | satır satır log + progress → tablolar |
+| `proxine -p http -s` | proxy listesi | (boş) |
+| `proxine -p http -o f.lst -s` | (boş) | (boş) |
 
 ------------------------------------------------------------
 
@@ -280,10 +282,10 @@ cron / systemd-timer / GitHub Actions ile sarmalayın. Boru hattına girecekse
 
 ```bash
 # Cron: her saat başı socks5 listesini güncelle
-0 * * * * cd ~/proxine && ./proxine.py socks5 -s -o /var/lib/proxies/socks5.lst
+0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
 # Proxy Profiler ile zincirle (canlılık + elite testi)
-./proxine.py http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
 ```
 
 ------------------------------------------------------------
