@@ -99,8 +99,15 @@ chmod +x proxine.py
 # 静默模式 —— 适合管道
 ./proxine.py -p http -s | grep '^192\.'
 
-# 与 Proxy Profiler 串联
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# 与 Proxy Profiler 串联 — 3 个示例
+# 1) 提取 Elite (L1) 匿名 HTTP 代理
+./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
+
+# 2) SOCKS5 — 跳过 judge(更快),只保留能绕过 Cloudflare WAF 的活代理
+./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
+
+# 3) HTTPS — elite + 国家筛选 (US/DE/JP) + Google 可达性测试
+./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
 ### GitHub 令牌(可选但推荐)
@@ -278,8 +285,8 @@ GitHub Actions 包装。管道使用时推荐 `-s` 与 `-o`:
 # Cron:每小时更新 SOCKS5 列表
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# 与 Proxy Profiler 串联(存活 + elite 测试)
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# 每夜构建 elite HTTP(proxine + profiler 链)
+0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
 ```
 
 ------------------------------------------------------------

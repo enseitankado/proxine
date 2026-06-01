@@ -104,8 +104,15 @@ de GitHub (para resolver edades de fuentes — ver abajo).
 # Modo silencioso — ideal para pipelines
 ./proxine.py -p http -s | grep '^192\.'
 
-# Encadenar con Proxy Profiler
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Encadenar con Proxy Profiler — 3 ejemplos
+# 1) Extraer proxies HTTP elite (L1) anónimos
+./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
+
+# 2) SOCKS5 — saltar el judge (rápido), conservar solo los que pasan Cloudflare WAF
+./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
+
+# 3) HTTPS — elite + filtro por país (US/DE/JP) + test de acceso a Google
+./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
 ### Token de GitHub (opcional pero recomendado)
@@ -287,8 +294,8 @@ pipelines se recomiendan `-s` y `-o`:
 # Cron: actualiza la lista SOCKS5 cada hora
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# Encadenar con Proxy Profiler (vida + test elite)
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Build nocturno de HTTP elite (proxine + profiler)
+0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
 ```
 
 ------------------------------------------------------------

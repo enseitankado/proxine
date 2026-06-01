@@ -104,8 +104,15 @@ access token (для определения возраста источнико�
 # Тихий режим — идеально для пайплайнов
 ./proxine.py -p http -s | grep '^192\.'
 
-# Цепочка с Proxy Profiler
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Цепочка с Proxy Profiler — 3 примера
+# 1) Извлечь Elite (L1) анонимные HTTP-прокси
+./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
+
+# 2) SOCKS5 — пропустить judge (быстро), оставить только проходящих Cloudflare WAF
+./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
+
+# 3) HTTPS — elite + фильтр по странам (US/DE/JP) + тест доступа к Google
+./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
 ### GitHub-токен (необязательный, но рекомендуется)
@@ -286,8 +293,9 @@ Proxine спроектирован под разовый запуск; для р
 # Cron: обновлять список SOCKS5 каждый час
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# Цепочка с Proxy Profiler (проверка живучести + elite-тест)
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Ночная сборка elite-HTTP (proxine + profiler)
+0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
+
 ```
 
 ------------------------------------------------------------

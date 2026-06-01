@@ -104,8 +104,15 @@ Personal Access Token (zur Auflösung von Quellaltern — siehe unten).
 # Stiller Modus — ideal für Pipelines
 ./proxine.py -p http -s | grep '^192\.'
 
-# Kette mit Proxy Profiler
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Kette mit Proxy Profiler — 3 Beispiele
+# 1) Elite (L1) anonyme HTTP-Proxys extrahieren
+./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
+
+# 2) SOCKS5 — Judge überspringen (schnell), nur Cloudflare-WAF-passierende Proxys behalten
+./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
+
+# 3) HTTPS — elite + Länderfilter (US/DE/JP) + Google-Erreichbarkeitstest
+./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
 ### GitHub-Token (optional, empfohlen)
@@ -286,8 +293,8 @@ empfohlen:
 # Cron: SOCKS5-Liste stündlich aktualisieren
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# Kette mit Proxy Profiler (Lebendigkeit + Elite-Test)
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Nächtlich Elite-HTTP-Build (proxine + Profiler-Kette)
+0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
 ```
 
 ------------------------------------------------------------

@@ -102,8 +102,15 @@ Token（ソースの新鮮度を解決するため — 下記参照）。
 # 静音モード — パイプライン向け
 ./proxine.py -p http -s | grep '^192\.'
 
-# Proxy Profiler と連鎖
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Proxy Profiler と連鎖 — 3 例
+# 1) Elite (L1) 匿名 HTTP プロキシを抽出
+./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
+
+# 2) SOCKS5 — judge をスキップ（高速）、Cloudflare WAF を通過するライブ proxy のみ保持
+./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
+
+# 3) HTTPS — elite + 国フィルタ (US/DE/JP) + Google アクセステスト
+./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
 ### GitHub トークン（任意、推奨）
@@ -283,8 +290,8 @@ systemd-timer / GitHub Actions でラップしてください。パイプライ�
 # Cron: 1 時間毎に SOCKS5 リストを更新
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# Proxy Profiler と連鎖（生存確認 + elite テスト）
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# 毎晩 elite HTTP ビルド (proxine + profiler チェーン)
+0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
 ```
 
 ------------------------------------------------------------

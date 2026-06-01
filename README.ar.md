@@ -104,8 +104,15 @@ chmod +x proxine.py
 # الوضع الصامت — مثالي لخطوط الأنابيب
 ./proxine.py -p http -s | grep '^192\.'
 
-# سلسلة مع Proxy Profiler
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# سلسلة مع Proxy Profiler — 3 أمثلة
+# 1) استخراج بروكسيات HTTP من نوع Elite (L1) المجهولة
+./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
+
+# 2) SOCKS5 — تخطّي judge (أسرع) والإبقاء فقط على البروكسيات التي تجتاز Cloudflare WAF
+./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
+
+# 3) HTTPS — elite + فلتر الدول (US/DE/JP) + اختبار الوصول لـ Google
+./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
 ### رمز GitHub (اختياري لكن موصى به)
@@ -283,8 +290,8 @@ systemd-timer / GitHub Actions. لخطوط الأنابيب يُوصى بـ `-s`
 # Cron: تحديث قائمة SOCKS5 كل ساعة
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# سلسلة مع Proxy Profiler (فحص الحياة + اختبار elite)
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# بناء ليلي لبروكسيات HTTP من نوع elite (proxine + profiler)
+0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
 ```
 
 ------------------------------------------------------------

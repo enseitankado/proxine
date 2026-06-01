@@ -55,6 +55,28 @@ _OCTET = r"(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)"
 IP_PORT_RE = re.compile(rf"\b({_OCTET}(?:\.{_OCTET}){{3}}):([1-9]\d{{0,4}})\b")
 
 
+def _is_public_ipv4(ip: str) -> bool:
+    """Reserved/private/loopback/multicast IPv4 bloklarındaki adresleri ele.
+
+    Bunlar internet üzerinde routable proxy host'u olamaz. Bazı kaynaklar
+    yanlışlıkla 0.x.x.x veya 10.x.x.x gibi parça parça scan çıktıları
+    yayınlıyor; bunları çıktıdan düşürmek gerekir.
+    """
+    try:
+        a, b, _, _ = (int(o) for o in ip.split("."))
+    except ValueError:
+        return False
+    if a == 0:                       return False  # 0.0.0.0/8 "this network"
+    if a == 10:                      return False  # 10/8 private
+    if a == 127:                     return False  # 127/8 loopback
+    if a == 169 and b == 254:        return False  # 169.254/16 link-local
+    if a == 172 and 16 <= b <= 31:   return False  # 172.16/12 private
+    if a == 192 and b == 168:        return False  # 192.168/16 private
+    if 224 <= a <= 239:              return False  # 224/4 multicast
+    if a >= 240:                     return False  # 240/4 reserved + broadcast
+    return True
+
+
 # ---------------------------------------------------------------------------
 # Parsers — her biri (text, proto) → Iterable[str ("ip:port")]
 # ---------------------------------------------------------------------------
@@ -217,6 +239,9 @@ def _task(
                             error=f"{type(e).__name__}: {e}")
     parser = PARSERS.get(parser_name, parse_regex)
     proxies = list(parser(text, proto))
+    # Reserved/private/loopback IPv4'leri her zaman ele — yanlış kaynak çıktısı
+    # veya parser overhit'i sonucu 0.x.x.x / 10.x.x.x gibi adresler sızabiliyor.
+    proxies = [p for p in proxies if _is_public_ipv4(p.split(":", 1)[0])]
     if strict_ports:
         proxies = [p for p in proxies if _port_matches_proto(p, proto)]
     return SourceResult(url=url, proxies=proxies,

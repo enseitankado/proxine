@@ -102,8 +102,15 @@ access token (kaynak yaşlarını çözmek için — aşağıya bkz.).
 # Sessiz mod — boru hattı için ideal
 ./proxine.py -p http -s | grep '^192\.'
 
-# Proxy Profiler ile zincirle
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Proxy Profiler ile zincirleme — 3 örnek
+# 1) Elite (L1) anonim HTTP'leri çıkar
+./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
+
+# 2) SOCKS5 — judge'ı atla (hızlı), sadece Cloudflare WAF bypass eden canlı proxy'leri al
+./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
+
+# 3) HTTPS — elite + ülke filtresi (US/DE/JP) + Google erişim testi
+./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
 ### GitHub token (opsiyonel ama önerilir)
@@ -284,8 +291,8 @@ cron / systemd-timer / GitHub Actions ile sarmalayın. Boru hattına girecekse
 # Cron: her saat başı socks5 listesini güncelle
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# Proxy Profiler ile zincirle (canlılık + elite testi)
-./proxine.py -p http -s | php proxy-profiler/proxyprof.php -t http -l 1 -e -o working.lst
+# Her gece elite HTTP listesi (proxine + profiler zinciri)
+0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
 ```
 
 ------------------------------------------------------------
