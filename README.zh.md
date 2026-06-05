@@ -18,8 +18,8 @@
 输出干净有序的 `IP:PORT` 列表。
 
 <p align="center">
-<b>60 个独立源</b> · <b>166 个端点</b><br>
-HTTP: 51 &nbsp;·&nbsp; HTTPS: 29 &nbsp;·&nbsp; SOCKS4: 42 &nbsp;·&nbsp; SOCKS5: 44
+<b>86 个独立源</b> · <b>220 个端点</b><br>
+HTTP: 72 &nbsp;·&nbsp; HTTPS: 48 &nbsp;·&nbsp; SOCKS4: 49 &nbsp;·&nbsp; SOCKS5: 51
 </p>
 
 > Proxine 是聚合器,不是质量检测器。如需可用且真正 elite 级的代理,请将
@@ -31,7 +31,7 @@ HTTP: 51 &nbsp;·&nbsp; HTTPS: 29 &nbsp;·&nbsp; SOCKS4: 42 &nbsp;·&nbsp; SOCKS
 
 ## 特性
 
-- **60 个不同源**,166 个端点 —— GitHub raw 列表 + 9 个动态 API/HTML 源。
+- **86 个不同源**,220 个端点 —— GitHub raw 列表 + 8 个动态 API/HTML 源。
 - **并行 HTTP 抓取** —— 默认温和(`-c 1`);使用 `-c 20`+ 可提速约 10×。
 - **每源超时 + 重试** —— 慢主机不会拖累整体。
 - **新鲜度追踪。** 报告每个源的最后更新时间;GitHub 源通过 API 解析
@@ -201,74 +201,105 @@ export GITHUB_TOKEN=ghp_xxx
 
 ## 源清单
 
-共 **60 个独立源**,**166 个协议端点**。全部定义在 `sources.py`,新增一
+共 **86 个独立源**,**220 个协议端点**。全部定义在 `sources.py`,新增一
 源仅需一行修改。
 
-### GitHub raw 列表(51 个仓库)
+### GitHub raw 列表(77 个仓库)
 
-| Repo | 协议 |
+| 仓库 | 协议 |
 |---|---|
-| `ALIILAPRO/Proxy` | http, socks4, socks5 |
-| `Anonym0usWork1221/Free-Proxies` | http, https, socks4, socks5 |
-| `Argh94/Proxy-List` | http, socks4, socks5 |
-| `HankNovic/ProxyClean` | socks5 |
-| `ItzRazvyy/ProxyList` | http, https, socks4, socks5 |
-| `MohammadKobirShah/ProxyScraper-Pro` | http, socks4, socks5 |
-| `Mohammedcha/ProxRipper` | http, https, socks4, socks5 |
-| `MuRongPIG/Proxy-Master` | http, socks4, socks5 |
-| `RX4096/proxy-list` | http, https |
-| `RioMMO/ProxyFree` | http, socks4, socks5 |
-| `Seeh-Saah/awesome-free-proxy-list` | http, socks4, socks5 |
-| `Skillter/ProxyGather` | http, socks4, socks5 |
-| `TheSpeedX/PROXY-List` | http, socks4, socks5 |
-| `Thordata/awesome-free-proxy-list` | http, socks4, socks5 |
-| `Vann-Dev/proxy-list` | socks4, socks5 |
-| `Zaeem20/FREE_PROXIES_LIST` | http, https, socks4, socks5 |
+| `abusaeeidx/TazaProxy-Troxy` | https |
+| `adasd223/global-proxy-list` | socks5 |
 | `ahahaabas/anonymous-proxy-list-free` | http, socks4, socks5 |
+| `ahahaabas/global-proxy-list` | socks5 |
+| `ALIILAPRO/Proxy` | http, socks4, socks5 |
+| `alphaa1111/proxyscraper` | http, socks4, socks5 |
+| `Anonym0usWork1221/Free-Proxies` | http, https, socks5 |
 | `anutmagang/Free-HighQuality-Proxy-Socks` | http |
+| `Argh94/Proxy-List` | http, socks4 |
+| `Argh94/ProxyProwler` | socks4, socks5 |
 | `arunsakthivel96/proxyBEE` | http, https |
-| `b4mbo-o/Check-Free-Proxy` | http, socks4, socks5 |
+| `b4mbo-o/Check-Free-Proxy` | socks4 |
+| `berkay-digital/Proxy-Scraper` | http |
+| `CB-X2-Jun/proxy-lists` | http, https, socks4, socks5 |
+| `Cheagjihvg/simple-proxylist` | http, https, socks4, socks5 |
+| `claude89757/free_https_proxies` | https |
 | `databay-labs/free-proxy-list` | http, socks4, socks5 |
-| `dpangestuw/Free-Proxy` | http, socks4, socks5 |
-| `ebrasha/abdal-proxy-hub` | http, https, socks4, socks5 |
-| `elliottophellia/yakumo` | http, socks4, socks5 |
-| `ErcinDedeoglu/proxies` | http, https, socks4, socks5 |
+| `dpangestuw/Free-Proxy` | http |
+| `elliottophellia/yakumo` | socks4, socks5 |
+| `ErcinDedeoglu/proxies` | https |
 | `fate0/proxylist` | http, https |
+| `Firmfox/Proxify` | socks5 |
+| `gitrecon1455/fresh-proxy-list` | https, socks4, socks5 |
+| `HankNovic/ProxyClean` | socks5 |
 | `hookzof/socks5_list` | socks5 |
+| `i-am-unbekannt/BLITZPROXY` | http, socks4, socks5 |
+| `iplocate/free-proxy-list` | http, https, socks4 |
+| `IPParrot/proxy_ips` | http, https, socks4, socks5 |
+| `ItzRazvyy/ProxyList` | http, https, socks4, socks5 |
 | `jetkai/proxy-list` | http, https, socks4, socks5 |
-| `komutan234/Proxy-List-Free` | http, socks4, socks5 |
+| `LoneKingCode/free-proxy-db` | http, https, socks4 |
+| `mauricegift/free-proxies` | http, https, socks5 |
 | `mertguvencli/http-proxy-list` | http, https |
-| `mmpx12/proxy-list` | http, https, socks4, socks5 |
+| `MohammadKobirShah/ProxyScraper-Pro` | http, socks4, socks5 |
 | `monosans/proxy-list` | http, https, socks4, socks5 |
-| `mzyui/proxy-list` | http, socks4, socks5 |
-| `officialputuid/ProxyForEveryone` | http, https, socks4, socks5 |
+| `MrMarble/proxy-list` | https |
+| `Munachukwuw/Best-Free-Proxys` | http, socks4, socks5 |
+| `mzyui/proxy-list` | http |
+| `naravid19/checked-proxies` | http, socks4, socks5 |
+| `NikolaiT/free-proxy-list` | http, https, socks4, socks5 |
+| `noctiro/getproxy` | socks4 |
+| `officialputuid/ProxyForEveryone` | http, socks4, socks5 |
 | `openproxyhub/proxy-exports` | socks5 |
+| `parserpp/ip_ports` | http, https |
 | `proxifly/free-proxy-list` | http, https, socks4, socks5 |
-| `proxy4parsing/proxy-list` | http |
+| `proxygenerator1/ProxyGenerator` | http, https, socks4, socks5 |
 | `prxchk/proxy-list` | http, socks4, socks5 |
-| `r00tee/Proxy-List` | https, socks4, socks5 |
+| `r00tee/Proxy-List` | https, socks4 |
 | `rdavydov/proxy-list` | http, socks4, socks5 |
+| `RioMMO/ProxyFree` | http |
 | `roosterkid/openproxylist` | https, socks4, socks5 |
+| `RX4096/proxy-list` | http, https |
 | `rx443/proxy-list` | http, https |
-| `saisuiu/uiu` | http, socks4 |
+| `saisuiu/uiu` | http |
+| `Seeh-Saah/awesome-free-proxy-list` | http, socks4, socks5 |
+| `SevenworksDev/proxy-list` | https, socks4 |
 | `shiftytr/proxy-list` | https |
+| `shubhamshendre/Free-Proxies` | http |
+| `shulganovo/Proxylists` | socks5 |
+| `Skillter/ProxyGather` | http, socks4, socks5 |
+| `SoliSpirit/proxy-list` | socks4 |
 | `stamparm/aux` | http |
 | `sunny9577/proxy-scraper` | http, https |
-| `vakhov/fresh-proxy-list` | http, https, socks4, socks5 |
-| `vmheaven/VMHeaven.io-Free-Proxy-List` | http, https, socks4, socks5 |
+| `themiralay/Proxy-List-World` | http |
+| `theriturajps/proxy-list` | https, socks4, socks5 |
+| `TheSpeedX/PROXY-List` | http, socks4, socks5 |
+| `Thordata/awesome-free-proxy-list` | http, socks4, socks5 |
+| `Tsprnay/Proxy-lists` | http, https, socks4, socks5 |
+| `TuanMinPay/live-proxy` | https |
+| `vakhov/fresh-proxy-list` | https, socks4, socks5 |
+| `Vann-Dev/proxy-list` | socks4, socks5 |
+| `VPSLabCloud/VPSLab-Free-Proxy-List` | http, https, socks4, socks5 |
+| `watchttvv/free-proxy-list` | http, https |
 | `yemixzy/free-proxy-list` | http, socks4, socks5 |
-| `zevtyardt/proxy-list` | http, socks4, socks5 |
+| `Zaeem20/FREE_PROXIES_LIST` | http, https, socks4, socks5 |
+| `zevtyardt/proxy-list` | socks4, socks5 |
 | `zloi-user/hideip.me` | http, https, socks4, socks5 |
 
-### 动态 API 与 HTML 源(9 个端点)
+### GitLab 列表(1 个仓库)
 
-| Endpoint | 类型 | 协议 |
+| 仓库 | 协议 |
+|---|---|
+| `gitlab.com/syedusama5556/auto-proxy-list-generator` | http |
+
+### 动态 API 与 HTML 源(8 个端点)
+
+| 端点 | 类型 | 协议 |
 |---|---|---|
-| `api.proxyscrape.com` | 公共 API | http, https, socks4, socks5 |
-| `pubproxy.com` | 公共 API | http, https, socks4, socks5 |
-| `proxyspace.pro` | 纯文本列表 | http, https, socks5 |
-| `spys.me` | 纯文本列表 | socks4, socks5 |
+| `api.proxyscrape.com` | 公开 API | http, https, socks4, socks5 |
 | `free-proxy-list.net` | HTML 抓取 | http |
+| `proxyspace.pro` | 纯文本列表 | https, socks5 |
+| `pubproxy.com` | 公开 API | http, https, socks4, socks5 |
 | `www.google-proxy.net` | HTML 抓取 | http, https |
 | `www.ipaddress.com` | HTML 抓取 | http, https |
 | `www.socks-proxy.net` | HTML 抓取 | socks4 |
