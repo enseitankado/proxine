@@ -1,4 +1,13 @@
-*.tmp
-__pycache__/
-*.pyc
-*.egg-info/
+# Default: ignore everything that isn't explicitly whitelisted below.
+# Goal: nothing but the protocol proxy lists should ever be added/pushed.
+*
+
+# Allow git to descend into subdirectories so the whitelist can match inside them.
+!*/
+
+# Whitelist: this file + the four protocol list files.
+!.gitignore
+!http.lst
+!https.lst
+!socks4.lst
+!socks5.lst
