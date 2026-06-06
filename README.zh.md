@@ -1,7 +1,7 @@
-<p align="right">
+<p align="center">
 <sub>
-<a href="README.md">🇹🇷 Türkçe</a> ·
-<a href="README.en.md">🇬🇧 English</a> ·
+<a href="README.md">🇬🇧 English</a> ·
+<a href="README.tr.md">🇹🇷 Türkçe</a> ·
 <a href="README.ru.md">🇷🇺 Русский</a> ·
 <a href="README.de.md">🇩🇪 Deutsch</a> ·
 <a href="README.ja.md">🇯🇵 日本語</a> ·

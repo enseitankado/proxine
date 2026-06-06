@@ -1,7 +1,7 @@
-<p align="right">
+<p align="center">
 <sub>
-<a href="README.md">🇹🇷 Türkçe</a> ·
-<b>🇬🇧 English</b> ·
+<a href="README.md">🇬🇧 English</a> ·
+<b>🇹🇷 Türkçe</b> ·
 <a href="README.ru.md">🇷🇺 Русский</a> ·
 <a href="README.de.md">🇩🇪 Deutsch</a> ·
 <a href="README.ja.md">🇯🇵 日本語</a> ·
@@ -13,41 +13,41 @@
 
 # 🚀 Proxine
 
-Open-source proxy list aggregator. A single command fetches **HTTP / HTTPS /
-SOCKS4 / SOCKS5** proxies from dozens of public sources in parallel,
-automatically drops stale sources, deduplicates, validates, and emits a clean
-sorted `IP:PORT` list.
+Açık kaynak proxy listesi toplayıcı. Tek bir komutla onlarca farklı kaynaktan
+**HTTP / HTTPS / SOCKS4 / SOCKS5** proxy adresini paralel olarak çeker, eskimiş
+kaynakları otomatik eler, yinelenenleri ayıklar ve sıralı, doğrulanmış
+`IP:PORT` listesi üretir.
 
 <p align="center">
-<b>86 unique sources</b> · <b>220 endpoints</b><br>
+<b>86 benzersiz kaynak</b> · <b>220 uç nokta</b><br>
 HTTP: 72 &nbsp;·&nbsp; HTTPS: 48 &nbsp;·&nbsp; SOCKS4: 49 &nbsp;·&nbsp; SOCKS5: 51
 </p>
 
-> Proxine is an aggregator, not a quality checker. For working, truly elite
-> proxies, pipe its output into a tester like
-> [Proxy Profiler](https://github.com/enseitankado/proxy-profiler).
+> Proxine bir aggregator'dır, kalite testçisi değil. Çalışan ve gerçekten elite
+> seviyeli proxy'ler için çıktıyı
+> [Proxy Profiler](https://github.com/enseitankado/proxy-profiler) gibi bir
+> test aracına borulayın.
 
 ------------------------------------------------------------
 
-## Features
+## Özellikler
 
-- **86 distinct sources**, 220 endpoints — GitHub raw lists + 8 dynamic
-  API/HTML feeds.
-- **Parallel HTTP fetch** — default is polite (`-c 1`); raise to `-c 20`+ for
-  ~10× speedup.
-- **Per-source timeout + retry** — a slow host can't stall the whole run.
-- **Freshness tracking.** Each source's last update is reported; GitHub
-  commit times are resolved via the API. `-F SECONDS` filters out stale
-  sources (default 24 h).
-- **Strict validation.** IPv4 octets (0–255) and ports (1–65535) checked
-  with a hardened regex.
-- **Smart output.** TTY progress bar; silent in pipes; ASCII status tables;
-  `-s` for full quiet; `-o` to write a file.
-- **Zero dependencies.** Python ≥ 3.10 stdlib only.
+- **86 farklı kaynak**, 220 uç nokta — GitHub raw listeler + 8 dinamik
+  API/HTML kaynağı.
+- **Paralel HTTP** ile çekim; varsayılan kaynaklara nazik (`-c 1`), istenirse
+  `-c 20`+ ile 10× hız.
+- **Kaynak başına timeout + retry** — yavaş bir host tüm işi tıkamaz.
+- **Tazelik takibi.** Her kaynağın son güncellenme zamanı raporlanır; GitHub
+  kaynakları için commit zamanı API'den çözülür. `-F SECONDS` ile yaşlı
+  kaynaklar otomatik elenir (varsayılan 24 saat).
+- **Sıkı doğrulama.** IPv4 oktet (0–255) ve port (1–65535) regex'le süzülür.
+- **Akıllı çıktı.** Progress bar TTY'de, dosya/pipe'da sessiz; ASCII tablo
+  raporları; `-s` ile tamamen sessiz mod; `-o` ile dosyaya yazma.
+- **Sıfır bağımlılık.** Yalnızca Python ≥ 3.10 stdlib.
 
 ------------------------------------------------------------
 
-## Installation
+## Kurulum
 
 ```bash
 git clone https://github.com/enseitankado/proxine.git
@@ -56,111 +56,111 @@ chmod +x proxine.py
 ./proxine.py --help
 ```
 
-Requirement: **Python ≥ 3.10**. Optional: `gh` CLI or a GitHub personal
-access token (to resolve source ages — see below).
+Gereksinim: **Python ≥ 3.10**. İsteğe bağlı: `gh` CLI veya GitHub personal
+access token (kaynak yaşlarını çözmek için — aşağıya bkz.).
 
 ------------------------------------------------------------
 
-## Usage
+## Kullanım
 
 ```bash
-./proxine.py -p <http|https|socks4|socks5> [options]
+./proxine.py -p <http|https|socks4|socks5> [seçenekler]
 ```
 
-### Flags
+### Bayraklar
 
-| Long | Short | Default | Description |
+| Uzun | Kısa | Varsayılan | Açıklama |
 |---|---|---|---|
-| `--protocol` | `-p` | — | **Required.** Protocol to collect: `http`, `https`, `socks4`, `socks5`. |
-| `--format` | `-f` | `ip-port` | Output format. `url` produces `<proto>://IP:PORT`. |
-| `--timeout` | `-t` | `15` | Per-source HTTP timeout (seconds). |
-| `--concurrency` | `-c` | `1` | Number of parallel requests. Higher = faster + more sockets. |
-| `--retries` | `-r` | `2` | Retry attempts per failed source. |
-| `--max-ports` | `-m` | `5` | Drop an IP entirely if it appears on more than N distinct ports (port-scanner/honeypot filter). `0` disables. |
-| `--fresh` | `-F` | `86400` | Drop sources older than this many seconds. `0` disables the filter. |
-| `--github-token` | `-g` | — | GitHub PAT. Falls back to `$GITHUB_TOKEN`, then `gh auth token`. |
-| `--output` | `-o` | — | Write the proxy list to FILE; stdout stays empty. |
-| `--lang` | `-L` | auto | UI language: `tr`, `en`, `de`, `es`, `ru`, `zh`. Otherwise auto-detected from `$PROXINE_LANG`/`$LANG`/locale. |
-| `--strict-ports` / `--no-strict-ports` | — | on | Drop proxies whose port doesn't match the declared protocol family (e.g. a SOCKS-declared proxy on port 80 is dropped). |
-| `--silent` | `-s` | — | Suppress all stderr output. |
+| `--protocol` | `-p` | — | **Zorunlu.** Toplanacak protokol: `http`, `https`, `socks4`, `socks5`. |
+| `--format` | `-f` | `ip-port` | Çıktı biçimi. `url` seçilirse `<proto>://IP:PORT`. |
+| `--timeout` | `-t` | `15` | Kaynak başına HTTP timeout (saniye). |
+| `--concurrency` | `-c` | `1` | Eşzamanlı istek sayısı. Yüksek değer = daha hızlı, daha çok soket. |
+| `--retries` | `-r` | `2` | Başarısız kaynak başına tekrar deneme sayısı. |
+| `--max-ports` | `-m` | `5` | Bir IP bu kadardan fazla farklı portla görünürse tamamen at (port-scanner/honeypot eleme). `0` = devre dışı. |
+| `--fresh` | `-F` | `86400` | Bundan eski kaynaklar çıktıya katılmaz (saniye). `0` = filtre kapalı. |
+| `--github-token` | `-g` | — | GitHub PAT. Yoksa `$GITHUB_TOKEN`, o da yoksa `gh auth token` denenir. |
+| `--output` | `-o` | — | Proxy listesini bu dosyaya yaz; stdout boş kalır. |
+| `--lang` | `-L` | otomatik | Arayüz dili: `tr`, `en`, `de`, `es`, `ru`, `zh`. Yoksa `$PROXINE_LANG`/`$LANG`/locale'den algılanır. |
+| `--strict-ports` / `--no-strict-ports` | — | açık | Beyan edilen protokol ailesine uymayan portlardaki proxy'leri at (örn. SOCKS olarak listelenmiş port 80 atılır). |
+| `--silent` | `-s` | — | Tüm stderr çıktısını sustur. |
 
-### Examples
+### Örnekler
 
 ```bash
-# HTTPS proxies to stdout (default freshness filter: 24h)
+# Stdout'a HTTPS proxy listesi (varsayılan tazelik filtresi 24h)
 ./proxine.py -p https
 
-# SOCKS5 list to a file, faster
+# SOCKS5 listesini dosyaya yaz, hızı artır
 ./proxine.py -p socks5 -c 32 -o socks5.lst
 
-# Only sources updated in the last hour
+# Sadece son 1 saatte güncellenen kaynakları kullan
 ./proxine.py -p http -F 3600
 
-# URL-style output: socks5://1.2.3.4:1080
+# URL biçiminde çıktı: socks5://1.2.3.4:1080
 ./proxine.py -p socks5 -f url
 
-# Silent mode — ideal for pipelines
+# Sessiz mod — boru hattı için ideal
 ./proxine.py -p http -s | grep '^192\.'
 
-# Chain with Proxy Profiler — 3 examples
-# 1) Extract Elite (L1) anonymous HTTP proxies
+# Proxy Profiler ile zincirleme — 3 örnek
+# 1) Elite (L1) anonim HTTP'leri çıkar
 ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o elite_http.lst
 
-# 2) SOCKS5 — skip judge (fast), keep only Cloudflare-WAF-bypassing live proxies
+# 2) SOCKS5 — judge'ı atla (hızlı), sadece Cloudflare WAF bypass eden canlı proxy'leri al
 ./proxine.py -p socks5 -s | python3 ~/proxy-profiler/proxyprof.py -p socks5 --no-judge --access-test cloudflare -o cf_socks5.lst
 
-# 3) HTTPS — elite + country filter (US/DE/JP) + Google access test
+# 3) HTTPS — elite + ülke filtresi (US/DE/JP) + Google erişim testi
 ./proxine.py -p https -s | python3 ~/proxy-profiler/proxyprof.py -p https -l 1 --country US,DE,JP --access-test google -o elite_us_de_jp_https.lst
 ```
 
-### GitHub token (optional but recommended)
+### GitHub token (opsiyonel ama önerilir)
 
-GitHub raw URLs don't expose `Last-Modified`, so source ages are resolved via
-the GitHub API. The **anonymous limit is 60 requests/hour**; one run hits 50+
-GitHub URLs, so without a token most ages show as "LIVE". With a token the
-limit is **5,000 requests/hour** — no `repo` scope needed, public read is
-enough.
+GitHub raw URL'leri `Last-Modified` döndürmediği için kaynak yaşları GitHub
+API'sinden çözülür. API'nin **anonim limiti 60 istek/saat**, tek bir çalışmada
+50+ GitHub kaynağına bakıldığından token vermeden çoğu yaş "live" görünür.
+Token verirseniz limit **5.000 istek/saat**'e çıkar — `repo` izni gerekmez,
+public read yeterlidir.
 
-Three ways — Proxine picks the first available:
+Üç yol — biri varsa Proxine otomatik bulur:
 
 ```bash
-# 1) Explicit flag
+# 1) Açık parametre
 ./proxine.py -p socks5 -g ghp_xxx
 
-# 2) Environment variable
+# 2) Env değişkeni
 export GITHUB_TOKEN=ghp_xxx
 ./proxine.py -p socks5
 
-# 3) Nothing — if `gh` CLI is installed and authenticated
+# 3) Hiçbir şey yapmayın — `gh` CLI yüklü ve giriş yapılmışsa
 ./proxine.py -p socks5
 ```
 
-If the token is rate-limited or invalid, a clear warning is shown at the end.
+Token rate-limit'e takılır veya geçersizse rapor sonunda açık uyarı görürsünüz.
 
 ------------------------------------------------------------
 
-## Output
+## Çıktı
 
-### 1. Progress bar
+### 1. İlerleme çubuğu
 
-During the run, two phases on stderr:
+Çalışma sırasında stderr'e iki fazlı bir yüzde çubuğu yazılır:
 
 ```
 [████████████░░░░░░░░]  60%  24/43  fetching  ✓ github.com/komutan234/Proxy-List-Free  +10,794  total 69,749
 [██████████████████░░]  90%  18/20  enriching ✓ github.com/Mohammedcha/ProxRipper                total 309,478
 ```
 
-- 20-character `█/░` bar, percentage, done/total
-- Phase label: `fetching` (HTTP) or `enriching` (GitHub commit API)
-- `✓` success, `x` failure
-- `+N` new proxies from this source
-- `total N` accumulated unique total
+- 20 karakter `█/░` çubuğu, yüzde, tamamlanan/toplam sayım
+- Faz etiketi: `fetching` (HTTP fetch) ya da `enriching` (GitHub commit API)
+- `✓` başarı, `x` hata
+- `+N` o kaynaktan gelen yeni proxy sayısı
+- `total N` birikmiş benzersiz toplam
 
-Automatically silent off-TTY (won't pollute redirected output).
+TTY dışında otomatik sessiz olur (dosya/pipe yönlendirmesini bozmaz).
 
-### 2. Source status table
+### 2. Kaynak durum tablosu
 
-At the end, on stderr:
+Çalışma sonunda stderr'e:
 
 ```
 ┌────────┬──────┬─────────┬─────────────────────────────────────────────────┐
@@ -173,15 +173,15 @@ At the end, on stderr:
 │ STALE  │  47w │  89,708 │ github.com/MuRongPIG/Proxy-Master               │
 │ FAIL   │    — │       — │ www.socks-proxy.net                             │
 └────────┴──────┴─────────┴─────────────────────────────────────────────────┘
-  OK     fresh within `--fresh` window; proxies kept
-  LIVE   no age info (dynamic API); proxies kept
-  STALE  older than `--fresh`; proxies dropped from output
-  FAIL   fetch error; no contribution
+  OK     `--fresh` penceresi içinde güncellenmiş; proxy'leri kullanıldı
+  LIVE   yaş bilgisi yok (dinamik API); proxy'leri kullanıldı
+  STALE  `--fresh` eşiğinden eski; proxy'leri çıktıdan düşürüldü
+  FAIL   çekme hatası; katkı yok
 ```
 
-Sort order: OK (freshest first) → LIVE → STALE → FAIL.
+Sıralama: OK (en taze üstte) → LIVE → STALE → FAIL.
 
-### 3. Summary box
+### 3. Özet kutusu
 
 ```
 ┌──────────┬─────────────────────────────────────────────┐
@@ -192,25 +192,26 @@ Sort order: OK (freshest first) → LIVE → STALE → FAIL.
 └──────────┴─────────────────────────────────────────────┘
 ```
 
-### Output mode matrix
+### Çıktı modu tablosu
 
-| Command | stdout | stderr |
+| Komut | stdout | stderr |
 |---|---|---|
-| `proxine -p http` | proxy list | per-source log + progress → status table → summary |
-| `proxine -p http -o f.lst` | (empty) | per-source log + progress → tables |
-| `proxine -p http -s` | proxy list | (empty) |
-| `proxine -p http -o f.lst -s` | (empty) | (empty) |
+| `proxine -p http` | proxy listesi | satır satır log + progress → durum tablosu → özet |
+| `proxine -p http -o f.lst` | (boş) | satır satır log + progress → tablolar |
+| `proxine -p http -s` | proxy listesi | (boş) |
+| `proxine -p http -o f.lst -s` | (boş) | (boş) |
 
 ------------------------------------------------------------
 
-## Sources
+## Kaynaklar
 
-A total of **86 unique sources**, **220 protocol endpoints**. All defined in
-`sources.py`; adding a new source is a one-line change.
+Toplam **86 benzersiz kaynak**, **220 protokol uç noktası**. Hepsi
+`sources.py` içinde tanımlıdır; yeni bir kaynak eklemek tek satır
+değişiklik gerektirir.
 
-### GitHub raw lists (77 repos)
+### GitHub raw listeleri (77 repo)
 
-| Repo | Protocols |
+| Repo | Protokoller |
 |---|---|
 | `abusaeeidx/TazaProxy-Troxy` | https |
 | `adasd223/global-proxy-list` | socks5 |
@@ -290,20 +291,20 @@ A total of **86 unique sources**, **220 protocol endpoints**. All defined in
 | `zevtyardt/proxy-list` | socks4, socks5 |
 | `zloi-user/hideip.me` | http, https, socks4, socks5 |
 
-### GitLab lists (1 repo)
+### GitLab listeleri (1 repo)
 
-| Repo | Protocols |
+| Repo | Protokoller |
 |---|---|
 | `gitlab.com/syedusama5556/auto-proxy-list-generator` | http |
 
-### Dynamic API and HTML sources (8 endpoints)
+### Dinamik API ve HTML kaynakları (8 endpoint)
 
-| Endpoint | Kind | Protocols |
+| Endpoint | Tür | Protokoller |
 |---|---|---|
-| `api.proxyscrape.com` | Public API | http, https, socks4, socks5 |
+| `api.proxyscrape.com` | Açık API | http, https, socks4, socks5 |
 | `free-proxy-list.net` | HTML scraper | http |
-| `proxyspace.pro` | Plain-text list | https, socks5 |
-| `pubproxy.com` | Public API | http, https, socks4, socks5 |
+| `proxyspace.pro` | Düz metin liste | https, socks5 |
+| `pubproxy.com` | Açık API | http, https, socks4, socks5 |
 | `www.google-proxy.net` | HTML scraper | http, https |
 | `www.ipaddress.com` | HTML scraper | http, https |
 | `www.socks-proxy.net` | HTML scraper | socks4 |
@@ -311,50 +312,51 @@ A total of **86 unique sources**, **220 protocol endpoints**. All defined in
 
 ------------------------------------------------------------
 
-## Automation
+## Otomatikleştirme
 
-Proxine is designed for one-shot runs; wrap it with cron / systemd-timer /
-GitHub Actions for scheduled updates. For pipelines, `-s` and `-o` are
-recommended:
+Proxine tek seferlik çalıştırma için tasarlanmıştır; düzenli güncelleme için
+cron / systemd-timer / GitHub Actions ile sarmalayın. Boru hattına girecekse
+`-s` ve `-o` önerilir:
 
 ```bash
-# Cron: update the SOCKS5 list every hour
+# Cron: her saat başı socks5 listesini güncelle
 0 * * * * cd ~/proxine && ./proxine.py -p socks5 -s -o /var/lib/proxies/socks5.lst
 
-# Nightly elite-HTTP build (proxine + profiler chain)
+# Her gece elite HTTP listesi (proxine + profiler zinciri)
 0 3 * * * cd ~/proxine && ./proxine.py -p http -s | python3 ~/proxy-profiler/proxyprof.py -p http -l 1 -o /var/lib/proxies/elite_http.lst
 ```
 
 ------------------------------------------------------------
 
-## Related tools
+## İlgili araçlar
 
-- **[Proxy Profiler](https://github.com/enseitankado/proxy-profiler)** —
-  multi-threaded tester for liveness, anonymity (Elite/Anonymous/Transparent),
-  CloudFlare and Google pass-through.
-- **[EliteProxySwitcher](https://www.eliteproxyswitcher.com/)** — GUI proxy
-  rotator for Windows.
+- **[Proxy Profiler](https://github.com/enseitankado/proxy-profiler)** — proxy
+  listesini canlılık, anonimlik (Elite/Anonymous/Transparent), CloudFlare ve
+  Google geçişi açısından çoklu iş parçacığıyla test eder.
+- **[EliteProxySwitcher](https://www.eliteproxyswitcher.com/)** — Windows için
+  GUI tabanlı periyodik proxy değiştirici.
 - **[Open Proxy Checker](https://openproxy.space/software/proxy-checker)** —
-  Windows list verifier.
+  Windows için liste doğrulayıcı.
 
 ------------------------------------------------------------
 
-## License
+## Lisans
 
-Open source. You may redistribute, modify, and use it commercially or
-privately. Keep the original author attribution (Özgür Koca) in derivative
-work. Software is provided "as is"; all usage risk is on the user.
+Açık kaynaktır. Yeniden dağıtabilir, değiştirebilir, ticari ya da özel olarak
+kullanabilirsiniz. Türev çalışmalarda orijinal yazar (Özgür Koca) atıfını
+koruyun. Yazılım "olduğu gibi" sunulur; kullanım riski tamamen kullanıcıya
+aittir.
 
-## Author
+## Yazar
 
-**Özgür Koca** — teacher at a vocational
-[school](https://samsuneml.meb.k12.tr/).
+**Özgür Koca** — meslek lisesinde
+[öğretmenlik](https://samsuneml.meb.k12.tr/) yapıyor.
 GitHub: [enseitankado](https://github.com/enseitankado) · Blog:
 [tankado.com](https://www.tankado.com)
 
-## Support
+## Destek
 
-If you find this useful, leave a ⭐. Want to buy me a coffee?
-[Here you go](https://www.buymeacoffee.com/ozgurkoca).
+Beğendiyseniz ⭐ verin; bir kahve ısmarlamak isterseniz
+[buyrun](https://www.buymeacoffee.com/ozgurkoca).
 
 [![Star History Chart](https://api.star-history.com/svg?repos=enseitankado/proxine&type=Date)](https://star-history.com/#enseitankado/proxine&Date)
