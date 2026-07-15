@@ -14,9 +14,9 @@
 # 🚀 Proxine
 
 Open-Source-Aggregator für Proxy-Listen. Ein einziger Befehl ruft parallel
-**HTTP / HTTPS / SOCKS4 / SOCKS5**-Proxys aus Dutzenden öffentlichen Quellen
-ab, verwirft veraltete Quellen automatisch, entfernt Duplikate, validiert
-und liefert eine saubere, sortierte `IP:PORT`-Liste.
+**frische HTTP / HTTPS / SOCKS4 / SOCKS5**-Proxys aus hunderten kuratierten
+öffentlichen Endpunkten ab, verwirft veraltete Quellen automatisch, entfernt
+Duplikate, validiert und liefert eine saubere, sortierte `IP:PORT`-Liste.
 
 <p align="center">
 <b>86 unterschiedliche Quellen</b> · <b>220 Endpunkte</b><br>

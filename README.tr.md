@@ -13,10 +13,10 @@
 
 # 🚀 Proxine
 
-Açık kaynak proxy listesi toplayıcı. Tek bir komutla onlarca farklı kaynaktan
-**HTTP / HTTPS / SOCKS4 / SOCKS5** proxy adresini paralel olarak çeker, eskimiş
-kaynakları otomatik eler, yinelenenleri ayıklar ve sıralı, doğrulanmış
-`IP:PORT` listesi üretir.
+Açık kaynak proxy listesi toplayıcı. Tek bir komutla yüzlerce özenle seçilmiş
+uç noktadan **taze HTTP / HTTPS / SOCKS4 / SOCKS5** proxy adresini paralel
+olarak çeker, eskimiş kaynakları otomatik eler, yinelenenleri ayıklar ve
+sıralı, doğrulanmış `IP:PORT` listesi üretir.
 
 <p align="center">
 <b>86 benzersiz kaynak</b> · <b>220 uç nokta</b><br>

@@ -14,9 +14,10 @@
 # 🚀 Proxine
 
 Agregador de listas de proxies de código abierto. Con un solo comando obtiene
-proxies **HTTP / HTTPS / SOCKS4 / SOCKS5** de docenas de fuentes públicas en
-paralelo, descarta automáticamente fuentes obsoletas, elimina duplicados,
-valida y entrega una lista `IP:PORT` ordenada y limpia.
+proxies **frescos HTTP / HTTPS / SOCKS4 / SOCKS5** desde cientos de endpoints
+públicos seleccionados en paralelo, descarta automáticamente fuentes
+obsoletas, elimina duplicados, valida y entrega una lista `IP:PORT` ordenada
+y limpia.
 
 <p align="center">
 <b>86 fuentes únicas</b> · <b>220 endpoints</b><br>

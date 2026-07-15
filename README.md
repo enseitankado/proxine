@@ -13,10 +13,10 @@
 
 # 🚀 Proxine
 
-Open-source proxy list aggregator. A single command fetches **HTTP / HTTPS /
-SOCKS4 / SOCKS5** proxies from dozens of public sources in parallel,
-automatically drops stale sources, deduplicates, validates, and emits a clean
-sorted `IP:PORT` list.
+Open-source proxy list aggregator. One command pulls **fresh HTTP / HTTPS /
+SOCKS4 / SOCKS5** proxies from hundreds of curated public endpoints in
+parallel, automatically drops stale sources, deduplicates, validates, and
+emits a clean sorted `IP:PORT` list.
 
 <p align="center">
 <b>86 unique sources</b> · <b>220 endpoints</b><br>
